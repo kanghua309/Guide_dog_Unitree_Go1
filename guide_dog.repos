@@ -15,3 +15,7 @@ repositories:
     type: git
     url: git@github.com:katie-hughes/unitree_ros2.git
     version: main
+  velodyne:
+    type: git
+    url: git@github.com:ros-drivers/velodyne.git
+    version: humble-devel
