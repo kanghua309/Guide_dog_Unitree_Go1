@@ -30,10 +30,9 @@ The use of the Picovoice deep learning voice recognition library has enabled the
 # Packages used:
 - [Voice recognition](https://github.com/Marnonel6/Guide_dog_Unitree_Go1/tree/main/listen_talk_ros2)
 - [Object detection - YOLOv7](https://github.com/Marnonel6/YOLOv7_ROS2)
-- [Unitree navigation](https://github.com/Marnonel6/unitree_nav/tree/guide_dog)
+- [Unitree navigation](https://github.com/nosixtools/unitree_nav/tree/main)
 - [Unitree ROS 2](https://github.com/katie-hughes/unitree_ros2/tree/main)
-- [Lidar ROS 2 SDK](https://github.com/Marnonel6/rslidar_sdk_ros2)
-- [Lidar msg](https://github.com/RoboSense-LiDAR/rslidar_msg)
+- [velodyne](https://github.com/ros-drivers/velodyne/tree/humble-devel)
 
 # Use [VCS tool](https://github.com/dirk-thomas/vcstool) to clone all the required packages:
 - The vcs import command clones all repositories of a previously exported file with the following command:
@@ -61,13 +60,8 @@ mv Guide_dog_Unitree_Go1/guide_dog.repos guide_dog.repos
 ```
 vcs import < guide_dog.repos
 ```
-7) Lidar_ROS_2_SDK contains a submodule rs_driver that needs to be downloaded:
 ```
-cd rslidar_sdk_ros2/
-git submodule init
-git submodule update
-```
-8) Build package in workspace directory:
+7) Build package in workspace directory:
 ```
 colcon build
 ```
