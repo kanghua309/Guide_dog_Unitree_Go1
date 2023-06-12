@@ -60,7 +60,6 @@ mv Guide_dog_Unitree_Go1/guide_dog.repos guide_dog.repos
 ```
 vcs import < guide_dog.repos
 ```
-```
 7) Build package in workspace directory:
 ```
 colcon build
