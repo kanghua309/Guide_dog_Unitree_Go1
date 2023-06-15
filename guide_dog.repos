@@ -9,7 +9,7 @@ repositories:
     version: main
   unitree_ros2:
     type: git
-    url: git@github.com:katie-hughes/unitree_ros2.git
+    url: git@github.com:kanghua309/unitree_ros2.git
     version: main
   velodyne:
     type: git
