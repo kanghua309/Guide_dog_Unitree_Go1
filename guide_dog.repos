@@ -3,10 +3,6 @@ repositories:
     type: git
     url: git@github.com:Marnonel6/Guide_dog_Unitree_Go1.git
     version: main
-  YOLOv7_ROS2:
-    type: git
-    url: git@github.com:Marnonel6/YOLOv7_ROS2.git
-    version: main
   unitree_nav:
     type: git
     url: git@github.com:nosixtools/unitree_nav.git
@@ -18,4 +14,4 @@ repositories:
   velodyne:
     type: git
     url: git@github.com:ros-drivers/velodyne.git
-    version: humble-devel
+    version: foxy-devel
