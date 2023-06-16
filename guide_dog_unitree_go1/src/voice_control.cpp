@@ -32,7 +32,8 @@
 #include "std_srvs/srv/detail/empty__struct.hpp"
 #include "std_srvs/srv/detail/set_bool__struct.hpp"
 #include "std_srvs/srv/set_bool.hpp"
-#include "geometry_msgs/msg/twist.hpp"
+//#include "geometry_msgs/msg/twist.hpp"
+#include "geometry_msgs/msg/twist.h"
 
 
 using namespace std::chrono_literals;
@@ -80,17 +81,17 @@ private:
 
 
     /// \brief Voice command topic callback
-    void voice_command_callback(const std_msgs::msg::String & msg)
+    void voice_command_callback(const std_msgs::msg::String::SharedPtr msg)
     {
-        RCLCPP_ERROR_STREAM(get_logger(), "\n Command \n" << msg.data);
+        RCLCPP_ERROR_STREAM(get_logger(), "\n Command \n" << msg->data);
 
-        if (msg.data == "stand" || msg.data == "up")
+        if (msg->data == "stand" || msg->data == "up")
         {
             auto result_future_stand = stand_up_client_->async_send_request(
                 std::make_shared<std_srvs::srv::Empty::Request>(), std::bind(&voice_control::response_callback_stand, this,
                                    std::placeholders::_1));
         }
-        else if (msg.data == "lay")
+        else if (msg->data == "lay")
         {
             auto result_future_lay = lay_down_client_->async_send_request(
                 std::make_shared<std_srvs::srv::Empty::Request>(), std::bind(&voice_control::response_callback_lay, this,
