@@ -5,7 +5,7 @@ repositories:
     version: main
   unitree_nav:
     type: git
-    url: git@github.com:nosixtools/unitree_nav.git
+    url: git@github.com:kanghua309/unitree_nav.git
     version: main
   unitree_ros2:
     type: git
