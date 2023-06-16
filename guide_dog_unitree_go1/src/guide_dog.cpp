@@ -236,7 +236,7 @@ private:
     /// \brief Voice command topic callback
     void voice_command_callback(const std_msgs::msg::String::SharedPtr msg)
     {
-        RCLCPP_ERROR_STREAM(get_logger(), "\n Command \n" << msg.data);
+        RCLCPP_ERROR_STREAM(get_logger(), "\n Command \n" << msg->data);
 
         if (msg->data == "walk")
         {
@@ -302,10 +302,10 @@ private:
   }
 
   void goal_response_callback(
-    const rclcpp_action::ClientGoalHandle<nav2_msgs::action::NavigateToPose>::SharedPtr & goal_handle
+    std::shared_future< rclcpp_action::ClientGoalHandle<nav2_msgs::action::NavigateToPose>::SharedPtr> goal_handle
   ) {
     goal_response_received_ = true;
-    goal_handle_ = goal_handle;
+    goal_handle_ = goal_handle.get();
     RCLCPP_INFO_STREAM(get_logger(), "Goal response");
   }
 
@@ -317,7 +317,8 @@ private:
     feedback_ = feedback;
 
     if (feedback_) {
-      auto [roll, pitch, yaw] = quaternion_to_rpy(feedback_->current_pose.pose.orientation);
+      double roll = 0.0, pitch = 0.0, yaw = 0.0;
+      std::tie(roll, pitch, yaw) = quaternion_to_rpy(feedback_->current_pose.pose.orientation);
 
       RCLCPP_INFO_STREAM(get_logger(), "x = " << feedback_->current_pose.pose.position.x
                                   << ", y = " << feedback_->current_pose.pose.position.y
