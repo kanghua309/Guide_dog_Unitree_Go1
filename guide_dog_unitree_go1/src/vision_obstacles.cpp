@@ -109,11 +109,11 @@ class vision_obstacles : public rclcpp::Node
       rclcpp::Subscription<geometry_msgs::msg::Point>::SharedPtr stairs_vision_subscriber_;
 
       /// \brief Subscription callback function for /door object detection topic
-      void door_vision_callback(const geometry_msgs::msg::Point & msg)
+      void door_vision_callback(const geometry_msgs::msg::Point::SharedPtr msg)
         {
-            x_door_ = msg.x;
-            z_door_ = msg.y;
-            y_door_ = msg.z;
+            x_door_ = msg->x;
+            z_door_ = msg->y;
+            y_door_ = msg->z;
             create_door_obstacles_array();
         }
 
@@ -148,11 +148,11 @@ class vision_obstacles : public rclcpp::Node
       }
 
       /// \brief Subscription callback function for /door object detection topic
-      void person_vision_callback(const geometry_msgs::msg::Point & msg)
+      void person_vision_callback(const geometry_msgs::msg::Point::SharedPtr msg)
       {
-          x_person_ = msg.x;
-          z_person_ = msg.y;
-          y_person_ = msg.z;
+          x_person_ = msg->x;
+          z_person_ = msg->y;
+          y_person_ = msg->z;
           create_person_obstacles_array();
       }
 
@@ -187,11 +187,11 @@ class vision_obstacles : public rclcpp::Node
       }
 
       /// \brief Subscription callback function for /door object detection topic
-      void stairs_vision_callback(const geometry_msgs::msg::Point & msg)
+      void stairs_vision_callback(const geometry_msgs::msg::Point::SharedPtr msg)
       {
-          x_stairs_ = msg.x;
-          z_stairs_ = msg.y;
-          y_stairs_ = msg.z;
+          x_stairs_ = msg->x;
+          z_stairs_ = msg->y;
+          y_stairs_ = msg->z;
           create_stairs_obstacles_array();
       }
 
