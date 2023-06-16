@@ -1,7 +1,7 @@
 repositories:
   Guide_dog_Unitree_Go1:
     type: git
-    url: git@github.com:Marnonel6/Guide_dog_Unitree_Go1.git
+    url: git@github.com:kanghua309/Guide_dog_Unitree_Go1.git
     version: main
   unitree_nav:
     type: git
