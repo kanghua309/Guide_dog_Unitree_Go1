@@ -37,7 +37,8 @@
 #include "geometry_msgs/msg/quaternion.hpp"
 #include "tf2/LinearMath/Quaternion.h"
 #include "tf2/LinearMath/Matrix3x3.h"
-#include "tf2_geometry_msgs/tf2_geometry_msgs.hpp"
+//#include "tf2_geometry_msgs/tf2_geometry_msgs.hpp"
+#include "tf2_geometry_msgs/tf2_geometry_msgs.h"
 #include "nav2_msgs/action/navigate_to_pose.hpp"
 #include "unitree_nav_interfaces/srv/nav_to_pose.hpp"
 #include "std_msgs/msg/string.hpp"
@@ -233,11 +234,11 @@ private:
   }
 
     /// \brief Voice command topic callback
-    void voice_command_callback(const std_msgs::msg::String & msg)
+    void voice_command_callback(const std_msgs::msg::String::SharedPtr msg)
     {
         RCLCPP_ERROR_STREAM(get_logger(), "\n Command \n" << msg.data);
 
-        if (msg.data == "walk")
+        if (msg->data == "walk")
         {
             if (state_ == State::IDLE)
             {
@@ -269,7 +270,7 @@ private:
                 }
             }
         }
-        else if (msg.data != "walk") // While walking if you hear anything from voice command STOP
+        else if (msg->data != "walk") // While walking if you hear anything from voice command STOP
         {
             // Cancel goal service
             RCLCPP_INFO_STREAM(get_logger(), "Cancelling navigation.");
