@@ -30,9 +30,9 @@ The use of the Picovoice deep learning voice recognition library has enabled the
 # Packages used:
 - [Voice recognition](https://github.com/Marnonel6/Guide_dog_Unitree_Go1/tree/main/listen_talk_ros2)
 - [Object detection - YOLOv7](https://github.com/Marnonel6/YOLOv7_ROS2)
-- [Unitree navigation](https://github.com/nosixtools/unitree_nav/tree/main)
-- [Unitree ROS 2](https://github.com/katie-hughes/unitree_ros2/tree/main)
-- [velodyne](https://github.com/ros-drivers/velodyne/tree/humble-devel)
+- [Unitree navigation](https://github.com/kanghua309/unitree_nav/tree/main)
+- [Unitree ROS 2](https://github.com/kanghua309/unitree_ros2/tree/main)
+- [velodyne](https://github.com/ros-drivers/velodyne/tree/foxy-devel)
 
 # Use [VCS tool](https://github.com/dirk-thomas/vcstool) to clone all the required packages:
 - The vcs import command clones all repositories of a previously exported file with the following command:
