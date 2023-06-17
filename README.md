@@ -1,4 +1,7 @@
 # Guide_dog_Unitree_Go1
+This repo is for ros2 foxy only!!!!!!!!!!!!!!!!!!!!
+
+
 Guide dogs have been used for decades to assist visually impaired individuals in navigating their surroundings. However, these dogs come at a high cost, ranging from $20,000 to $40,000. Additionally, they are red-green color blind, which limits their ability to interpret street signs and other visual cues.
 
 To address these limitations, a I Programmed the Unitree Go1 quadruped robot dog to become an autonomous guide dog. By incorporating advanced technologies such as speech recognition, object recognition, and autonomous navigation, the robot dog will be able to help visually impaired individuals navigate their surroundings and avoid obstacles. And because a robot dog can be updated through machine learning and software updates, it is possible to continually improve its abilities over time.
