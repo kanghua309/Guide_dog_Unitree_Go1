@@ -14,5 +14,9 @@ $ DOCKER_BUILDKIT=1 docker buildx build \
   --push .
 
 
-#!!!
+编译ARM64的镜像
 DOCKER_BUILDKIT=1 docker build --platform linux/arm64 --ssh default=/root/.ssh/id_rsa . -f ros2_dev_0.Dockerfile
+
+编译AMD64上镜像
+DOCKER_BUILDKIT=1 docker build --platform linux/amd64 --ssh default=/root/.ssh/id_rsa . -f ros2_dev_0.Dockerfile
+
