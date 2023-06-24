@@ -108,18 +108,26 @@ RUN --mount=type=ssh \
     vcs import src < ./guide_dog.repos && \
     find ./ -name ".git" | xargs rm -rf
 
-#RUN --mount=type=cache,target=/var/cache/apt \
-#    --mount=type=cache,target=/var/lib/apt \
-RUN  apt-get update && rosdepc install -r -y \
+RUN --mount=type=cache,target=/var/cache/apt \
+    --mount=type=cache,target=/var/lib/apt \
+    apt-get update && rosdepc install -r -y \
       --from-paths src \
       --ignore-src \
       --rosdistro $ROS_DISTRO
 
-RUN ls -la
+
+RUN apt-get update \
+        && apt-get install -y ros-foxy-ament-* \
+ 	&& apt-get clean \
+        && rm -rf /var/lib/apt/lists/*
+
+ENV RMW_IMPLEMENTATION=rmw_fastrtps_cpp
 #RUN --mount=type=cache,target=/root/.ccache \
-RUN source $ROS2_WS/setup.bash \
+RUN    source $ROS2_WS/setup.bash \
     && colcon build \
       --symlink-install
+
+RUN echo "export RMW_IMPLEMENTATION=rmw_fastrtps_cpp" >> ~/.bashrc
 
 COPY ./entrypoint.sh /
 ENTRYPOINT ["/entrypoint.sh"]
