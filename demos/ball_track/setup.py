@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-package_name = 'republisher_ros2'
+package_name = 'ball_track_ros2'
 setup(
  name=package_name,
  version='0.0.0',
@@ -25,7 +25,7 @@ setup(
  tests_require=['pytest'],
  entry_points={
      'console_scripts': [
-             'mono_node = republisher_ros2.mono_node:main'
+             'track_node = ball_track_ros2.track_node:main'
      ],
    },
 )
