@@ -1,70 +1,42 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
+
 import cv2
-import rospy
+import rclpy
+from rclpy.node import Node
+from sensor_msgs.msg import Image, CameraInfo
 from cv_bridge import CvBridge
-from sensor_msgs.msg import Image
-from sensor_msgs.msg import CameraInfo
-from camera_info_manager import CameraInfoManager
 
-bridge = CvBridge()
+class CameraRepublisherNode(Node):
+    def __init__(self):
+        super().__init__('camera_republisher')
+        self.get_logger().info('camera_republisher node started')
 
-left_ci = None
-vid = None
+        device_id = self.get_parameter('device_id').get_parameter_value().integer_value
+        camera_name = self.get_parameter('camera_name').get_parameter_value().string_value
+        calibration_left = self.get_parameter('calibration_left').get_parameter_value().string_value
 
-def start_node():
+        self.left_ci = CameraInfo()
 
-    rospy.init_node('camera_republisher', anonymous=True)
-    rospy.loginfo('cam_pub node started')
+        if calibration_left:
+            self.left_ci.load_from_file(calibration_left)
 
-    deviceId = rospy.get_param('~device_id')
-    camera_name = rospy.get_param('~camera_name')
-    calibration_left = rospy.get_param('~calibration_left')
+        self.vid = cv2.VideoCapture(device_id)
 
-    left_ci = CameraInfoManager(cname=camera_name+'/left', namespace='')
+        self.vid.set(cv2.CAP_PROP_FRAME_WIDTH, 1856)
+        self.vid.set(cv2.CAP_PROP_FRAME_HEIGHT, 800)
 
-    if calibration_left:
-        left_ci.setURL(calibration_left)
-        left_ci.loadCameraInfo()
+        self.pub_left = self.create_publisher(Image, f'{camera_name}/image_raw', 1)
+        self.pub_left_ci = self.create_publisher(CameraInfo, f'{camera_name}/camera_info', 1)
 
-    global vid
-    vid = cv2.VideoCapture(deviceId)
+        self.bridge = CvBridge()
+        self.timer = self.create_timer(0.04, self.publish_image)  # 25 Hz (1/25 = 0.04)
 
-    vid.set(cv2.CAP_PROP_FRAME_WIDTH, 1856) # stereo feed, divide this by 2 if you want left image, offset crop half-width to get right image
-    vid.set(cv2.CAP_PROP_FRAME_HEIGHT, 800)
+    def publish_image(self):
+        ret, frame = self.vid.read()
+        if not ret:
+            return
 
-    pub_left = rospy.Publisher(rospy.get_namespace()+'/image_raw', Image, queue_size=1)
-    
-    pub_left_ci = rospy.Publisher(rospy.get_namespace()+'/camera_info', CameraInfo, queue_size=1)
-
-    rate = rospy.Rate(25) # 25hz
-    count = 0
-
-    while not rospy.is_shutdown():
-        
-        ret, frame = vid.read()
-        print("capturing frame..")
-    
         frame_left = frame[0:800, 928:1856]
-        img_left = bridge.cv2_to_imgmsg(frame_left, "bgr8")
+        img_left = self.bridge.cv2_to_imgmsg(frame_left, "bgr8")
 
-        now = rospy.get_rostime()
-        
-        img_left.header.stamp = now
-        img_left.header.frame_id = camera_name
-        img_left.header.seq = count
-        pub_left.publish(img_left)
-
-        l_ci = left_ci.getCameraInfo()
-        l_ci.header = img_left.header
-        pub_left_ci.publish(l_ci)
-    
-        rate.sleep()
-
-if __name__ == '__main__':
-    try:
-        start_node()
-    except rospy.ROSInterruptException:
-        pass
-
-vid.release()
-cv2.destroyAllWindows()
+        now = self.get

@@ -13,7 +13,7 @@ setup(
    ],
  install_requires=['setuptools',
                    'cv2',
-                   'rospy',
+                   'rclpy',
                    'cv_bridge',
                    'camera_info_manager'],
  zip_safe=True,
