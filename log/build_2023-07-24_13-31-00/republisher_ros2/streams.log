@@ -1,0 +1,24 @@
+[2.175s] Invoking command in '/workspaces/my_ros2_ws/src/Guide_dog_Unitree_Go1/demos/go_republisher': PYTHONPATH=/workspaces/my_ros2_ws/src/Guide_dog_Unitree_Go1/build/republisher_ros2/prefix_override:/workspaces/my_ros2_ws/src/Guide_dog_Unitree_Go1/install/republisher_ros2/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../../build/republisher_ros2 build --build-base /workspaces/my_ros2_ws/src/Guide_dog_Unitree_Go1/build/republisher_ros2/build install --record /workspaces/my_ros2_ws/src/Guide_dog_Unitree_Go1/build/republisher_ros2/install.log --single-version-externally-managed
+[2.629s] running egg_info
+[2.635s] writing ../../build/republisher_ros2/republisher_ros2.egg-info/PKG-INFO
+[2.642s] writing dependency_links to ../../build/republisher_ros2/republisher_ros2.egg-info/dependency_links.txt
+[2.649s] writing entry points to ../../build/republisher_ros2/republisher_ros2.egg-info/entry_points.txt
+[2.655s] writing requirements to ../../build/republisher_ros2/republisher_ros2.egg-info/requires.txt
+[2.659s] writing top-level names to ../../build/republisher_ros2/republisher_ros2.egg-info/top_level.txt
+[2.733s] reading manifest file '../../build/republisher_ros2/republisher_ros2.egg-info/SOURCES.txt'
+[2.738s] writing manifest file '../../build/republisher_ros2/republisher_ros2.egg-info/SOURCES.txt'
+[2.746s] running build
+[2.749s] running build_py
+[2.752s] copying republisher_ros2/mono_node.py -> /workspaces/my_ros2_ws/src/Guide_dog_Unitree_Go1/build/republisher_ros2/build/lib/republisher_ros2
+[2.757s] running install
+[2.760s] running install_lib
+[2.770s] copying /workspaces/my_ros2_ws/src/Guide_dog_Unitree_Go1/build/republisher_ros2/build/lib/republisher_ros2/mono_node.py -> /workspaces/my_ros2_ws/src/Guide_dog_Unitree_Go1/install/republisher_ros2/lib/python3.8/site-packages/republisher_ros2
+[2.786s] byte-compiling /workspaces/my_ros2_ws/src/Guide_dog_Unitree_Go1/install/republisher_ros2/lib/python3.8/site-packages/republisher_ros2/mono_node.py to mono_node.cpython-38.pyc
+[2.809s] running install_data
+[2.815s] running install_egg_info
+[2.822s] removing '/workspaces/my_ros2_ws/src/Guide_dog_Unitree_Go1/install/republisher_ros2/lib/python3.8/site-packages/republisher_ros2-0.0.0-py3.8.egg-info' (and everything under it)
+[2.831s] Copying ../../build/republisher_ros2/republisher_ros2.egg-info to /workspaces/my_ros2_ws/src/Guide_dog_Unitree_Go1/install/republisher_ros2/lib/python3.8/site-packages/republisher_ros2-0.0.0-py3.8.egg-info
+[2.956s] running install_scripts
+[3.002s] Installing mono_node script to /workspaces/my_ros2_ws/src/Guide_dog_Unitree_Go1/install/republisher_ros2/lib/republisher_ros2
+[3.016s] writing list of installed files to '/workspaces/my_ros2_ws/src/Guide_dog_Unitree_Go1/build/republisher_ros2/install.log'
+[3.065s] Invoked command in '/workspaces/my_ros2_ws/src/Guide_dog_Unitree_Go1/demos/go_republisher' returned '0': PYTHONPATH=/workspaces/my_ros2_ws/src/Guide_dog_Unitree_Go1/build/republisher_ros2/prefix_override:/workspaces/my_ros2_ws/src/Guide_dog_Unitree_Go1/install/republisher_ros2/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../../build/republisher_ros2 build --build-base /workspaces/my_ros2_ws/src/Guide_dog_Unitree_Go1/build/republisher_ros2/build install --record /workspaces/my_ros2_ws/src/Guide_dog_Unitree_Go1/build/republisher_ros2/install.log --single-version-externally-managed

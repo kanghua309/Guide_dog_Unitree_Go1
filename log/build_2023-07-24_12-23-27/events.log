@@ -1,0 +1,83 @@
+[0.000000] (-) TimerEvent: {}
+[0.004181] (-) JobUnselected: {'identifier': 'ball_track_ros2'}
+[0.005321] (-) JobUnselected: {'identifier': 'guide_dog_unitree_go1'}
+[0.009030] (-) JobUnselected: {'identifier': 'listen_talk_ros2'}
+[0.010211] (republisher_ros2) JobQueued: {'identifier': 'republisher_ros2', 'dependencies': OrderedDict()}
+[0.011329] (republisher_ros2) JobStarted: {'identifier': 'republisher_ros2'}
+[0.093286] (-) TimerEvent: {}
+[0.196577] (-) TimerEvent: {}
+[0.300064] (-) TimerEvent: {}
+[0.402034] (-) TimerEvent: {}
+[0.504235] (-) TimerEvent: {}
+[0.605797] (-) TimerEvent: {}
+[0.708539] (-) TimerEvent: {}
+[0.810828] (-) TimerEvent: {}
+[0.936638] (-) TimerEvent: {}
+[1.038308] (-) TimerEvent: {}
+[1.139764] (-) TimerEvent: {}
+[1.242453] (-) TimerEvent: {}
+[1.345794] (-) TimerEvent: {}
+[1.447204] (-) TimerEvent: {}
+[1.548848] (-) TimerEvent: {}
+[1.650852] (-) TimerEvent: {}
+[1.752109] (-) TimerEvent: {}
+[1.853656] (-) TimerEvent: {}
+[1.955466] (-) TimerEvent: {}
+[2.057046] (-) TimerEvent: {}
+[2.158589] (-) TimerEvent: {}
+[2.263130] (-) TimerEvent: {}
+[2.348353] (republisher_ros2) Command: {'cmd': ['/usr/bin/python3', 'setup.py', 'egg_info', '--egg-base', '../../build/republisher_ros2', 'build', '--build-base', '/workspaces/my_ros2_ws/src/Guide_dog_Unitree_Go1/build/republisher_ros2/build', 'install', '--record', '/workspaces/my_ros2_ws/src/Guide_dog_Unitree_Go1/build/republisher_ros2/install.log', '--single-version-externally-managed'], 'cwd': '/workspaces/my_ros2_ws/src/Guide_dog_Unitree_Go1/demos/go_republisher', 'env': {'HOSTNAME': 'docker-desktop', 'GIT_ASKPASS': '/vscode/vscode-server/bin/linux-x64/695af097c7bd098fbf017ce3ac85e09bbc5dda06/extensions/git/dist/askpass.sh', 'SHLVL': '2', 'LIBGL_ALWAYS_SOFTWARE': '1', 'LD_LIBRARY_PATH': '/workspaces/my_ros2_ws/install/unitree_nav_interfaces/lib:/workspaces/my_ros2_ws/install/unitree_legged_real/lib:/workspaces/my_ros2_ws/install/ros2_unitree_legged_msgs/lib:/opt/ros/foxy/opt/yaml_cpp_vendor/lib:/opt/ros/foxy/lib/x86_64-linux-gnu:/opt/ros/foxy/lib', 'BROWSER': '/vscode/vscode-server/bin/linux-x64/695af097c7bd098fbf017ce3ac85e09bbc5dda06/bin/helpers/browser.sh', 'AMENT_CPPCHECK_ALLOW_SLOW_VERSIONS': '1', 'HOME': '/home/ros', 'OLDPWD': '/workspaces/my_ros2_ws', 'TERM_PROGRAM_VERSION': '1.79.2', 'VSCODE_IPC_HOOK_CLI': '/tmp/vscode-ipc-395c8185-77d4-4d6b-aaff-5e35a6af0e7f.sock', 'ROS_PYTHON_VERSION': '3', 'VSCODE_GIT_ASKPASS_MAIN': '/vscode/vscode-server/bin/linux-x64/695af097c7bd098fbf017ce3ac85e09bbc5dda06/extensions/git/dist/askpass-main.js', 'VSCODE_GIT_ASKPASS_NODE': '/vscode/vscode-server/bin/linux-x64/695af097c7bd098fbf017ce3ac85e09bbc5dda06/node', 'COLORTERM': 'truecolor', 'REMOTE_CONTAINERS': 'true', 'WAYLAND_DISPLAY': '', 'COLCON_PREFIX_PATH': '/workspaces/my_ros2_ws/install:/opt/ros/foxy', 'ROS_DISTRO': 'foxy', 'REMOTE_CONTAINERS_IPC': '/tmp/vscode-remote-containers-ipc-5d7f1b39-f85e-4dd3-b09d-5abcd1a40a0c.sock', 'PULSE_SERVER': '', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'TERM': 'xterm-256color', 'ROS_LOCALHOST_ONLY': '0', 'PATH': '/vscode/vscode-server/bin/linux-x64/695af097c7bd098fbf017ce3ac85e09bbc5dda06/bin/remote-cli:/opt/ros/foxy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin', 'XDG_RUNTIME_DIR': '', 'REMOTE_CONTAINERS_SOCKETS': '["/tmp/vscode-ssh-auth-5d7f1b39-f85e-4dd3-b09d-5abcd1a40a0c.sock","/tmp/.X11-unix/X0"]', 'DISPLAY': 'host.docker.internal:0', 'LANG': 'en_US.UTF-8', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:', 'VSCODE_GIT_IPC_HANDLE': '/tmp/vscode-git-0fca6a4a34.sock', 'TERM_PROGRAM': 'vscode', 'SSH_AUTH_SOCK': '/tmp/vscode-ssh-auth-5d7f1b39-f85e-4dd3-b09d-5abcd1a40a0c.sock', 'AMENT_PREFIX_PATH': '/workspaces/my_ros2_ws/install/republisher_ros2:/workspaces/my_ros2_ws/install/unitree_nav_launch_module:/workspaces/my_ros2_ws/install/guide_dog_unitree_go1:/workspaces/my_ros2_ws/install/unitree_nav:/workspaces/my_ros2_ws/install/unitree_nav_interfaces:/workspaces/my_ros2_ws/install/unitree_legged_real:/workspaces/my_ros2_ws/install/ros2_unitree_legged_msgs:/workspaces/my_ros2_ws/install/listen_talk_ros2:/workspaces/my_ros2_ws/install/go1_description:/opt/ros/foxy', 'DEBIAN_FRONTEND': '', 'REMOTE_CONTAINERS_DISPLAY_SOCK': '/tmp/.X11-unix/X0', 'SHELL': '/bin/bash', 'VSCODE_GIT_ASKPASS_EXTRA_ARGS': '', 'PWD': '/workspaces/my_ros2_ws/src/Guide_dog_Unitree_Go1/build/republisher_ros2', 'PYTHONPATH': '/workspaces/my_ros2_ws/src/Guide_dog_Unitree_Go1/build/republisher_ros2/prefix_override:/workspaces/my_ros2_ws/src/Guide_dog_Unitree_Go1/install/republisher_ros2/lib/python3.8/site-packages:/workspaces/my_ros2_ws/install/republisher_ros2/lib/python3.8/site-packages:/workspaces/my_ros2_ws/install/unitree_nav_launch_module/lib/python3.10/site-packages:/workspaces/my_ros2_ws/install/unitree_nav_interfaces/local/lib/python3.10/dist-packages:/workspaces/my_ros2_ws/install/ros2_unitree_legged_msgs/local/lib/python3.10/dist-packages:/workspaces/my_ros2_ws/install/listen_talk_ros2/lib/python3.10/site-packages:/opt/ros/foxy/lib/python3.8/site-packages', 'COLCON': '1', 'CMAKE_PREFIX_PATH': '/workspaces/my_ros2_ws/install/guide_dog_unitree_go1:/workspaces/my_ros2_ws/install/unitree_nav:/workspaces/my_ros2_ws/install/unitree_nav_interfaces:/workspaces/my_ros2_ws/install/unitree_legged_real:/workspaces/my_ros2_ws/install/ros2_unitree_legged_msgs:/workspaces/my_ros2_ws/install/go1_description'}, 'shell': False}
+[2.392665] (-) TimerEvent: {}
+[2.495565] (-) TimerEvent: {}
+[2.598247] (-) TimerEvent: {}
+[2.700429] (-) TimerEvent: {}
+[2.802106] (-) TimerEvent: {}
+[2.903574] (-) TimerEvent: {}
+[2.913385] (republisher_ros2) StdoutLine: {'line': b'running egg_info\n'}
+[3.109396] (-) TimerEvent: {}
+[3.111158] (republisher_ros2) StdoutLine: {'line': b'creating ../../build/republisher_ros2/republisher_ros2.egg-info\n'}
+[3.116406] (republisher_ros2) StdoutLine: {'line': b'writing ../../build/republisher_ros2/republisher_ros2.egg-info/PKG-INFO\n'}
+[3.131885] (republisher_ros2) StdoutLine: {'line': b'writing dependency_links to ../../build/republisher_ros2/republisher_ros2.egg-info/dependency_links.txt\n'}
+[3.138380] (republisher_ros2) StdoutLine: {'line': b'writing entry points to ../../build/republisher_ros2/republisher_ros2.egg-info/entry_points.txt\n'}
+[3.143870] (republisher_ros2) StdoutLine: {'line': b'writing requirements to ../../build/republisher_ros2/republisher_ros2.egg-info/requires.txt\n'}
+[3.148113] (republisher_ros2) StdoutLine: {'line': b'writing top-level names to ../../build/republisher_ros2/republisher_ros2.egg-info/top_level.txt\n'}
+[3.166883] (republisher_ros2) StdoutLine: {'line': b"writing manifest file '../../build/republisher_ros2/republisher_ros2.egg-info/SOURCES.txt'\n"}
+[3.209832] (-) TimerEvent: {}
+[3.235291] (republisher_ros2) StdoutLine: {'line': b"reading manifest file '../../build/republisher_ros2/republisher_ros2.egg-info/SOURCES.txt'\n"}
+[3.244002] (republisher_ros2) StdoutLine: {'line': b"writing manifest file '../../build/republisher_ros2/republisher_ros2.egg-info/SOURCES.txt'\n"}
+[3.248588] (republisher_ros2) StdoutLine: {'line': b'running build\n'}
+[3.251743] (republisher_ros2) StdoutLine: {'line': b'running build_py\n'}
+[3.255665] (republisher_ros2) StdoutLine: {'line': b'creating /workspaces/my_ros2_ws/src/Guide_dog_Unitree_Go1/build/republisher_ros2/build\n'}
+[3.260236] (republisher_ros2) StdoutLine: {'line': b'creating /workspaces/my_ros2_ws/src/Guide_dog_Unitree_Go1/build/republisher_ros2/build/lib\n'}
+[3.263626] (republisher_ros2) StdoutLine: {'line': b'creating /workspaces/my_ros2_ws/src/Guide_dog_Unitree_Go1/build/republisher_ros2/build/lib/republisher_ros2\n'}
+[3.270169] (republisher_ros2) StdoutLine: {'line': b'copying republisher_ros2/__init__.py -> /workspaces/my_ros2_ws/src/Guide_dog_Unitree_Go1/build/republisher_ros2/build/lib/republisher_ros2\n'}
+[3.282528] (republisher_ros2) StdoutLine: {'line': b'copying republisher_ros2/mono_node.py -> /workspaces/my_ros2_ws/src/Guide_dog_Unitree_Go1/build/republisher_ros2/build/lib/republisher_ros2\n'}
+[3.291148] (republisher_ros2) StdoutLine: {'line': b'running install\n'}
+[3.295545] (republisher_ros2) StdoutLine: {'line': b'running install_lib\n'}
+[3.305124] (republisher_ros2) StdoutLine: {'line': b'creating /workspaces/my_ros2_ws/src/Guide_dog_Unitree_Go1/install/republisher_ros2/lib/python3.8/site-packages/republisher_ros2\n'}
+[3.311757] (-) TimerEvent: {}
+[3.315659] (republisher_ros2) StdoutLine: {'line': b'copying /workspaces/my_ros2_ws/src/Guide_dog_Unitree_Go1/build/republisher_ros2/build/lib/republisher_ros2/__init__.py -> /workspaces/my_ros2_ws/src/Guide_dog_Unitree_Go1/install/republisher_ros2/lib/python3.8/site-packages/republisher_ros2\n'}
+[3.342755] (republisher_ros2) StdoutLine: {'line': b'copying /workspaces/my_ros2_ws/src/Guide_dog_Unitree_Go1/build/republisher_ros2/build/lib/republisher_ros2/mono_node.py -> /workspaces/my_ros2_ws/src/Guide_dog_Unitree_Go1/install/republisher_ros2/lib/python3.8/site-packages/republisher_ros2\n'}
+[3.358230] (republisher_ros2) StdoutLine: {'line': b'byte-compiling /workspaces/my_ros2_ws/src/Guide_dog_Unitree_Go1/install/republisher_ros2/lib/python3.8/site-packages/republisher_ros2/__init__.py to __init__.cpython-38.pyc\n'}
+[3.383194] (republisher_ros2) StdoutLine: {'line': b'byte-compiling /workspaces/my_ros2_ws/src/Guide_dog_Unitree_Go1/install/republisher_ros2/lib/python3.8/site-packages/republisher_ros2/mono_node.py to mono_node.cpython-38.pyc\n'}
+[3.405445] (republisher_ros2) StdoutLine: {'line': b'running install_data\n'}
+[3.411980] (-) TimerEvent: {}
+[3.413046] (republisher_ros2) StdoutLine: {'line': b'creating /workspaces/my_ros2_ws/src/Guide_dog_Unitree_Go1/install/republisher_ros2/share/ament_index\n'}
+[3.418274] (republisher_ros2) StdoutLine: {'line': b'creating /workspaces/my_ros2_ws/src/Guide_dog_Unitree_Go1/install/republisher_ros2/share/ament_index/resource_index\n'}
+[3.422641] (republisher_ros2) StdoutLine: {'line': b'creating /workspaces/my_ros2_ws/src/Guide_dog_Unitree_Go1/install/republisher_ros2/share/ament_index/resource_index/packages\n'}
+[3.431226] (republisher_ros2) StdoutLine: {'line': b'copying resource/republisher_ros2 -> /workspaces/my_ros2_ws/src/Guide_dog_Unitree_Go1/install/republisher_ros2/share/ament_index/resource_index/packages\n'}
+[3.440803] (republisher_ros2) StdoutLine: {'line': b'copying package.xml -> /workspaces/my_ros2_ws/src/Guide_dog_Unitree_Go1/install/republisher_ros2/share/republisher_ros2\n'}
+[3.451512] (republisher_ros2) StdoutLine: {'line': b'running install_egg_info\n'}
+[3.457234] (republisher_ros2) StdoutLine: {'line': b'Copying ../../build/republisher_ros2/republisher_ros2.egg-info to /workspaces/my_ros2_ws/src/Guide_dog_Unitree_Go1/install/republisher_ros2/lib/python3.8/site-packages/republisher_ros2-0.0.0-py3.8.egg-info\n'}
+[3.512271] (-) TimerEvent: {}
+[3.592045] (republisher_ros2) StdoutLine: {'line': b'running install_scripts\n'}
+[3.616035] (-) TimerEvent: {}
+[3.673036] (republisher_ros2) StdoutLine: {'line': b'Installing mono_node script to /workspaces/my_ros2_ws/src/Guide_dog_Unitree_Go1/install/republisher_ros2/lib/republisher_ros2\n'}
+[3.702273] (republisher_ros2) StdoutLine: {'line': b"writing list of installed files to '/workspaces/my_ros2_ws/src/Guide_dog_Unitree_Go1/build/republisher_ros2/install.log'\n"}
+[3.716692] (-) TimerEvent: {}
+[3.768415] (republisher_ros2) CommandEnded: {'returncode': 0}
+[3.817181] (-) TimerEvent: {}
+[3.923894] (-) TimerEvent: {}
+[4.026556] (-) TimerEvent: {}
+[4.087543] (republisher_ros2) JobEnded: {'identifier': 'republisher_ros2', 'rc': 0}
+[4.100496] (-) EventReactorShutdown: {}
