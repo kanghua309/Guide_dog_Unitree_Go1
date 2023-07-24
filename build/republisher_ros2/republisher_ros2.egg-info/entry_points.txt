@@ -1,3 +1,0 @@
-[console_scripts]
-mono_node = republisher_ros2.mono_node:main
-
