@@ -15,7 +15,6 @@ setup(
                    'cv2',
                    'rospy',
                    'cv_bridge',
-                   'sensor_msgs',
                    'camera_info_manager'],
  zip_safe=True,
  maintainer='TODO',
