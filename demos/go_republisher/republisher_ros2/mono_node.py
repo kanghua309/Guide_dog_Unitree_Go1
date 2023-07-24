@@ -11,6 +11,7 @@ class CameraRepublisherNode(Node):
         super().__init__('camera_republisher')
         self.get_logger().info('camera_republisher node started')
 
+        #https://roboticsbackend.com/rclpy-params-tutorial-get-set-ros2-params-with-python/
         device_id = self.get_parameter('device_id').get_parameter_value().integer_value
         camera_name = self.get_parameter('camera_name').get_parameter_value().string_value
         calibration_left = self.get_parameter('calibration_left').get_parameter_value().string_value
@@ -50,6 +51,7 @@ class CameraRepublisherNode(Node):
         self.pub_left_ci.publish(l_ci)
 
 def main(args=None):
+    print(args)
     rclpy.init(args=args)
     try:
         camera_republisher_node = CameraRepublisherNode()

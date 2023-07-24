@@ -10,4 +10,4 @@ colcon build --packages-select republisher_ros2
 ros2 run republisher_ros2 mono_node
 
 给定参数启动
-ros2 run republisher_ros2 mono_node -- --device_id:=1 --camera_name:=camera_face
+ros2 run republisher_ros2 mono_node --ros-args -p --device_id:=1 --camera_name:=camera_face
