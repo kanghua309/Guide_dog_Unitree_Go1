@@ -12,15 +12,27 @@ class CameraRepublisherNode(Node):
         self.get_logger().info('camera_republisher node started')
 
         #https://roboticsbackend.com/rclpy-params-tutorial-get-set-ros2-params-with-python/
-        device_id = self.get_parameter('device_id').get_parameter_value().integer_value
-        camera_name = self.get_parameter('camera_name').get_parameter_value().string_value
-        calibration_left = self.get_parameter('calibration_left').get_parameter_value().string_value
 
 
+        self.declare_parameter('camera_name', rclpy.Parameter.Type.STRING)
+        self.declare_parameter('device_id', rclpy.Parameter.Type.INTEGER)
+        #self.declare_parameter('my_double_array', rclpy.Parameter.Type.DOUBLE_ARRAY)
+
+        #device_id = self.get_parameter('device_id').get_parameter_value().integer_value
+        #camera_name = self.get_parameter('camera_name').get_parameter_value().string_value
+        #calibration_left = self.get_parameter('calibration_left').get_parameter_value().string_value
+
+        camera_name = self.get_parameter('camera_name')
+        device_id = self.get_parameter('device_id')
+    
+        self.get_logger().info("str: %s, int: %s " %
+                            (str(camera_name.value),
+                                str(device_id.value)))
+        
         self.left_ci = CameraInfo()
 
-        if calibration_left:
-            self.left_ci.load_from_file(calibration_left)
+        # if calibration_left:
+        #     self.left_ci.load_from_file(calibration_left)
 
         self.vid = cv2.VideoCapture(device_id)
 
