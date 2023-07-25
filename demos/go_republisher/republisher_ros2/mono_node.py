@@ -25,22 +25,29 @@ class CameraRepublisherNode(Node):
         camera_name = self.get_parameter('camera_name')
         device_id = self.get_parameter('device_id')
     
-        self.get_logger().info("str: %s, int: %s " %
+        self.get_logger().info("str: %s, int: %d " %
                             (str(camera_name.value),
-                                str(device_id.value)))
+                                device_id.value))
         
         self.left_ci = CameraInfo()
+        print("1")
 
         # if calibration_left:
         #     self.left_ci.load_from_file(calibration_left)
 
-        self.vid = cv2.VideoCapture(device_id)
+        self.vid = cv2.VideoCapture(device_id.value)
+        print("2")
+        if not self.vid .isOpened():
+            print("cannot open camera ")
+
 
         self.vid.set(cv2.CAP_PROP_FRAME_WIDTH, 1856)
         self.vid.set(cv2.CAP_PROP_FRAME_HEIGHT, 800)
+        print("3",camera_name.value)
 
-        self.pub_left = self.create_publisher(Image, f'{camera_name}/image_raw', 1)
-        self.pub_left_ci = self.create_publisher(CameraInfo, f'{camera_name}/camera_info', 1)
+        self.pub_left = self.create_publisher(Image, f'{camera_name.value}/image_raw', 1)
+        self.pub_left_ci = self.create_publisher(CameraInfo, f'{camera_name.value}/camera_info', 1)
+        print("4")
 
         self.bridge = CvBridge()
         self.timer = self.create_timer(0.04, self.publish_image)  # 25 Hz (1/25 = 0.04)
