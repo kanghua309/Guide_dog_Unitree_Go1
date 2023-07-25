@@ -16,6 +16,7 @@ class CameraRepublisherNode(Node):
         camera_name = self.get_parameter('camera_name').get_parameter_value().string_value
         calibration_left = self.get_parameter('calibration_left').get_parameter_value().string_value
 
+
         self.left_ci = CameraInfo()
 
         if calibration_left:
