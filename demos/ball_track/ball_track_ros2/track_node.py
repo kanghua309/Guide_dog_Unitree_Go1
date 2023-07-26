@@ -2,7 +2,7 @@ import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import Image
 from std_msgs.msg import Bool
-from unitree_legged_msgs.msg import HighCmd
+from ros2_unitree_legged_msgs.msg import HighCmd
 from cv_bridge import CvBridge
 import cv2
 import numpy as np
