@@ -1,5 +1,7 @@
 sudo apt-get install ros-<distro>-sensor-msgs
 python3-sensor-msgs
+
+colcon build --packages-select ball_track_ros2
 ros2 run ball_track_ros2 track_node
 
 
