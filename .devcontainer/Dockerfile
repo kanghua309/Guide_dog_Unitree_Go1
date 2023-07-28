@@ -14,8 +14,8 @@ FROM althack/ros2:foxy-dev
 #    && rm -rf /var/lib/apt/lists/*
 # ENV DEBIAN_FRONTEND=dialog
 
-RUN sed -i s/archive.ubuntu.com/mirrors.tuna.tsinghua.edu.cn/g /etc/apt/sources.list
-RUN sed -i s/security.ubuntu.com/mirrors.tuna.tsinghua.edu.cn/g /etc/apt/sources.list
+RUN sed -i s/archive.ubuntu.com/mirrors.aliyun.com/g /etc/apt/sources.list
+RUN sed -i s/security.ubuntu.com/mirrors.aliyun.com/g /etc/apt/sources.list
 
 RUN pip config set global.index-url https://mirrors.aliyun.com/pypi/simple 
 RUN pip config set install.trusted-host mirrors.aliyun.com
