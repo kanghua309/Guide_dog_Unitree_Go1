@@ -1,5 +1,4 @@
 #!/bin/bash
-set -e
 
 
 function killProsess() {
@@ -13,6 +12,7 @@ function killProsess() {
 function start() {
 	echo "start"
 	echo "----------------"
+	rm -rf /tmp/.X11-unix/* 
 	USER=root vncserver :1 -geometry 800x600 -depth  24
         websockify -D --web=/usr/share/novnc/ 8080 localhost:5901
 }
@@ -21,7 +21,7 @@ function stop() {
 	echo "stop"
 	echo "----------------"
 	killProsess "websockify"
-        killProsess "Xtightvnc"
+        killProsess "Xtigervnc"
         rm /tmp/.X11-unix/* -rf
 }
 
