@@ -6,13 +6,15 @@ function killProsess() {
 	echo $NAME
 	PID=$(ps -e | grep $NAME | awk '{print $1}') 
 	echo "PID: $PID"
-	kill -9 $PID
+	kill -9 $PID >/dev/null
 }
 
 function start() {
 	echo "start"
 	echo "----------------"
-	rm -rf /tmp/.X11-unix/* 
+	rm -rf /tmp/.X11-unix/*
+	echo "123456" | vncpasswd -f > /home/ros/.vnc/passwd
+        chmod 0600 /home/ros/.vnc/passwd
 	USER=root vncserver :1 -geometry 800x600 -depth  24
         websockify -D --web=/usr/share/novnc/ 8080 localhost:5901
 }

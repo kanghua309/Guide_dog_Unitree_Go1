@@ -228,6 +228,13 @@
             "type": "shell",
             "command": "./setup.sh",
             "problemMatcher": []
+        },
+        {
+            "label": "vnc",
+            "detail": "Start VNC",
+            "type": "shell",
+            "command": "./vnc_ctr.sh restart",
+            "problemMatcher": []
         }
     ],
     "inputs": [
