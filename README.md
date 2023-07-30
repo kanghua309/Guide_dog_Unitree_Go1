@@ -72,13 +72,21 @@ colcon build
 ```
 git clone git@github.com:kanghua309/vscode_foxy_ws.git
 ```
+
 2) 进入vscode_foxy_ws目录后，下载guide_dog.repos
 ```
-https://raw.githubusercontent.com/kanghua309/Guide_dog_Unitree_Go1/main/guide_dog.repos
+cd vscode_foxy_ws
+wget https://raw.githubusercontent.com/kanghua309/Guide_dog_Unitree_Go1/main/guide_dog.repos
+wget https://ghproxy.com/https://raw.githubusercontent.com/kanghua309/Guide_dog_Unitree_Go1/main/guide_dog.repos
 ```
-3）打开vscode，通过devcontainer创建容器（需要一些时间）
+
+3）打开vscode，通过devcontainer创建容器（记得启动docker服务，构建过程需要一些时间）
+![image](https://github.com/kanghua309/Guide_dog_Unitree_Go1/assets/25759038/f58e8f53-c0e6-47ee-830a-004394a2ad0a)
+
 4）容器创建后，进行环境安装 - 执行setup.sh （从终端执行）或者从vs的task中选择setup 执行
+
 5）编译ros2对应的包（即可src下的包）
+
 6）其他debug等功能慢慢实验吧
 
 
