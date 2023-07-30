@@ -90,7 +90,8 @@ wget https://ghproxy.com/https://raw.githubusercontent.com/kanghua309/Guide_dog_
 ![image](https://github.com/kanghua309/Guide_dog_Unitree_Go1/assets/25759038/051dacd8-13b4-4e91-b424-276546861a3c)
 
 6）我们可讲src目录或其下的工程目录添加到工作区，从而其源码被vscode可管理
-![Uploading image.png…]()
+![image](https://github.com/kanghua309/Guide_dog_Unitree_Go1/assets/25759038/30e4e65a-0b0b-4c39-ad43-e7104c164a43)
+![image](https://github.com/kanghua309/Guide_dog_Unitree_Go1/assets/25759038/c09f0f03-19cf-448d-b188-ef2c0afddb56)
 
 
 7）其他debug等功能慢慢实验吧
