@@ -67,7 +67,7 @@ vcs import < guide_dog.repos
 ```
 colcon build
 ```
-### 使用vscode集成环境下进行开发的步骤
+## 使用vscode集成环境下进行开发的步骤
 1) 先下载vscode的集成环境（针对ros2-foxy）
 ```
 git clone git@github.com:kanghua309/vscode_foxy_ws.git
