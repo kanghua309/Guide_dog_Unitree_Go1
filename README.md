@@ -83,7 +83,7 @@ wget https://ghproxy.com/https://raw.githubusercontent.com/kanghua309/Guide_dog_
 3）打开vscode，通过devcontainer创建容器（记得启动docker服务，构建过程需要一些时间）
 ![image](https://github.com/kanghua309/Guide_dog_Unitree_Go1/assets/25759038/f58e8f53-c0e6-47ee-830a-004394a2ad0a)
 
-4）容器创建后，进行环境安装 - 执行setup.sh （从终端执行）或者从vs的task中选择setup 执行 —— 这里需要先将容器的sshkey加入到github库中 - 如果本地宿主机已经有认证的sshkey，可在devcontainer.json中作为docker启动参数挂接进去，请看该文件的内容 （该步骤将安装guide_dog项目需要的ros的各种依赖库，所以需要一些时间）
+4）容器创建后，进行环境安装 - 执行setup.sh （从终端执行）或者从vs的task中选择setup 执行 —— 这里需要先将容器的sshkey加入到github库中,后者更高级的是参考https://code.visualstudio.com/remote/advancedcontainers/sharing-git-credentials（该步骤将安装guide_dog项目需要的ros的各种依赖库，所以需要一些时间）
 ![image](https://github.com/kanghua309/Guide_dog_Unitree_Go1/assets/25759038/5da4ea6b-fec7-4529-8960-0c2997ef05ab)
 
 5）编译ros2对应的包（即可src下的包 ， 需要少许时间）
