@@ -13,7 +13,7 @@
 		"--security-opt=seccomp:unconfined",
 		"--security-opt=apparmor:unconfined",
 		//"--volume=/tmp/.X11-unix:/tmp/.X11-unix:rw",  //我们使用vnc，不实用x11
-		"--volume=/Users/${localEnv:USER}/.ssh:/home/ros/.ssh:ro",
+		//"--volume=/Users/${localEnv:USER}/.ssh:/home/ros/.ssh:ro", // config ssh-keygen and add your github
 		"--ipc=host",
 		"--add-host","raw.githubusercontent.com:185.199.108.133"
 		//"--device=/dev/video0:/dev/video0", //on linux 
@@ -21,8 +21,8 @@
 
 	],
 	"containerEnv": {
-		//"DISPLAY": "${localEnv:DISPLAY}", // Needed for GUI try ":0" for windows
-		"DISPLAY": "host.docker.internal:0",
+		"DISPLAY": "${localEnv:DISPLAY}", // Needed for GUI try ":0" for windows
+		//"DISPLAY": "host.docker.internal:0",
 		"WAYLAND_DISPLAY": "${localEnv:WAYLAND_DISPLAY}",
 		"XDG_RUNTIME_DIR": "${localEnv:XDG_RUNTIME_DIR}",
 		"PULSE_SERVER": "${localEnv:PULSE_SERVER}",
