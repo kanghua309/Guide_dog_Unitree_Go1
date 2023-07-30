@@ -77,6 +77,7 @@ git clone git@github.com:kanghua309/vscode_foxy_ws.git
 ```
 cd vscode_foxy_ws
 wget https://raw.githubusercontent.com/kanghua309/Guide_dog_Unitree_Go1/main/guide_dog.repos
+or
 wget https://ghproxy.com/https://raw.githubusercontent.com/kanghua309/Guide_dog_Unitree_Go1/main/guide_dog.repos
 ```
 
