@@ -15,6 +15,7 @@ rosdep install --from-paths src --ignore-src -r -y
 # 可查询ip地址 -- https://sites.ipaddress.com/raw.githubusercontent.com/
 #
 
+git config --global --add url."git@github.com:".insteadOf "https://github.com/"
 
 
 
