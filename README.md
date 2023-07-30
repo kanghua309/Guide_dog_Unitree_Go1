@@ -67,6 +67,20 @@ vcs import < guide_dog.repos
 ```
 colcon build
 ```
+### 使用vscode集成环境下进行开发的步骤
+1) 先下载vscode的集成环境（针对ros2-foxy）
+```
+git clone git@github.com:kanghua309/vscode_foxy_ws.git
+```
+2) 进入vscode_foxy_ws目录后，下载guide_dog.repos
+```
+https://raw.githubusercontent.com/kanghua309/Guide_dog_Unitree_Go1/main/guide_dog.repos
+```
+3）打开vscode，通过devcontainer创建容器（需要一些时间）
+4）容器创建后，进行环境安装 - 执行setup.sh （从终端执行）或者从vs的task中选择setup 执行
+5）编译ros2对应的包（即可src下的包）
+6）其他debug等功能慢慢实验吧
+
 
 ## Significant people who contributed to the project:
 The guide dog project was my own individual project, but some subsets of this project had collaborations with Nick Morales, Katie Hughes, Ava Zahedi and Rintaroh Shima. Thank you all for you contributions.
