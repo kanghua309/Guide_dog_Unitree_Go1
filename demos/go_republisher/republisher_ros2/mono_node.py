@@ -38,23 +38,25 @@ class CameraRepublisherNode(Node):
         if not self.vid .isOpened():
             print("cannot open camera ")
 
-        self.vid.set(cv2.CAP_PROP_FRAME_WIDTH, 1856)
-        self.vid.set(cv2.CAP_PROP_FRAME_HEIGHT, 800)
+        self.vid.set(cv2.CAP_PROP_FRAME_WIDTH, 600)
+        self.vid.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
         print("3",camera_name.value)
 
-        self.pub_left = self.create_publisher(Image, f'{camera_name.value}/image_raw', 1)
-        self.pub_left_ci = self.create_publisher(CameraInfo, f'{camera_name.value}/camera_info', 1)
+        self.pub_left = self.create_publisher(Image, f'{camera_name.value}/image_raw', 10)
+        self.pub_left_ci = self.create_publisher(CameraInfo, f'{camera_name.value}/camera_info', 10)
         print("4")
 
         self.bridge = CvBridge()
-        self.timer = self.create_timer(0.04, self.publish_image)  # 25 Hz (1/25 = 0.04)
+        self.timer = self.create_timer(2, self.publish_image)  # 25 Hz (1/25 = 0.04) ，也不知道为什么当在vmware中运行时，周期设置太小就会出现服务调用不通问题
+        print("5")
 
     def publish_image(self):
+    
         ret, frame = self.vid.read()
         if not ret:
             return
 
-        frame_left = frame[0:800, 928:1856]
+        frame_left = frame[0:480, 300:600]
         img_left = self.bridge.cv2_to_imgmsg(frame_left, "bgr8")
 
         now = self.get_clock().now().to_msg()
@@ -62,13 +64,14 @@ class CameraRepublisherNode(Node):
         img_left.header.stamp = now
         img_left.header.frame_id = self.get_parameter('camera_name').get_parameter_value().string_value
         self.pub_left.publish(img_left)
+        print(img_left.header.frame_id)
 
         l_ci = self.left_ci
         l_ci.header = img_left.header
         self.pub_left_ci.publish(l_ci)
+        print("publish over ... ")
 
 def main(args=None):
-    print(args)
     rclpy.init(args=args)
     try:
         camera_republisher_node = CameraRepublisherNode()

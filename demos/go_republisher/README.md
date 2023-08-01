@@ -2,7 +2,7 @@
 You should install the bridge via apt by doing sudo apt-get install ros-foxy-cv-bridge and sudo apt-get install ros-foxy-vision-opencv
 
 
-#pip install --extra-index-url https://rospypi.github.io/simple2 rclpy std_msgs
+
 创建包时制定依赖
 ros2 pkg create --build-type ament_python republisher_ros2 --dependencies rclpy std_msgs geometry_msgs python3-numpy
 
@@ -13,12 +13,13 @@ colcon build --packages-select republisher_ros2
 ros2 run republisher_ros2 mono_node
 
 给定参数启动
-ros2 run republisher_ros2 mono_node --ros-args -p device_id:=1 -p camera_name:=camera_face
+ros2 run republisher_ros2 mono_node --ros-args -p device_id:=0 -p camera_name:=camera_face
 
 调试：
 查看msg(静态)
 ros2 interface package republisher_ros2 #空
-ros2 interface show xxx
+ros2 interface show xxx 
+ros2 interface show sensor_msgs/msg/Image
 查看参数（动态）
 ros2 param list #camera_name and device_id
 查看topic（动态）
