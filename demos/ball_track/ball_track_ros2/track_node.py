@@ -24,6 +24,7 @@ class AdaFollowRedBallDemo(Node):
         self.upper_red = np.array([180, 255, 255], dtype=np.uint8)
 
     def image_callback(self, msg):
+        print("get image raw msg")
         raw_img = self.bridge.imgmsg_to_cv2(msg, "bgr8")
         height, width, channels = raw_img.shape
 
@@ -44,6 +45,7 @@ class AdaFollowRedBallDemo(Node):
                 self.no_ball = True
             self.publish_idle_mode(False)
         else:
+            print("Ball be detected!")
             largest_component_pixel_count = stats[largest_component_label, cv2.CC_STAT_AREA]
             floor_coverage = float(100.0 * largest_component_pixel_count / (height * width))
             if floor_coverage > 0.01:
@@ -52,7 +54,7 @@ class AdaFollowRedBallDemo(Node):
 
                 cv2.arrowedLine(raw_img, (width//2, height//2), (int(center_z), int(center_y)), color=(0, 255, 0),
                                 thickness=3, line_type=8, shift=0, tipLength=0.1)
-
+                print("Control gog head")
                 self.change_pitch_yaw(int(center_z), int(center_y), int(width//2), int(height//2))
                 self.publish_idle_mode(True)
 
@@ -73,7 +75,7 @@ class AdaFollowRedBallDemo(Node):
         euler_cmd.gaitType = 1
         euler_cmd.euler[1] = self.speed_y * factor_y
         euler_cmd.euler[2] = self.speed_z * factor_z
-
+        print("Pub euler cmd：",euler_cmd)
         self.publisher.publish(euler_cmd)
 
     def publish_idle_mode(self, status):
