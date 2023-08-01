@@ -12,8 +12,6 @@ class CameraRepublisherNode(Node):
         self.get_logger().info('camera_republisher node started')
 
         #https://roboticsbackend.com/rclpy-params-tutorial-get-set-ros2-params-with-python/
-
-
         self.declare_parameter('camera_name', rclpy.Parameter.Type.STRING)
         self.declare_parameter('device_id', rclpy.Parameter.Type.INTEGER)
         #self.declare_parameter('my_double_array', rclpy.Parameter.Type.DOUBLE_ARRAY)
@@ -39,7 +37,6 @@ class CameraRepublisherNode(Node):
         print("2")
         if not self.vid .isOpened():
             print("cannot open camera ")
-
 
         self.vid.set(cv2.CAP_PROP_FRAME_WIDTH, 1856)
         self.vid.set(cv2.CAP_PROP_FRAME_HEIGHT, 800)

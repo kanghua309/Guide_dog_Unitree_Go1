@@ -15,7 +15,19 @@ ros2 run republisher_ros2 mono_node
 给定参数启动
 ros2 run republisher_ros2 mono_node --ros-args -p device_id:=1 -p camera_name:=camera_face
 
+调试：
+查看msg(静态)
+ros2 interface package republisher_ros2 #空
+ros2 interface show xxx
+查看参数（动态）
+ros2 param list #camera_name and device_id
+查看topic（动态）
+ros2 topic info #camera_face/image_raw
+ros2 topic echo /camera_face/image_raw
+ros2 topic type /camera_face/image_raw --> 输出关于消息的msg, 然后使用ros2 interface show查看吗？
 
+
+其他：
 摄像头检测：（很遗憾mac下docker 中无法使用摄像头）
 lsusb 查看usb设备列表
 ls /dev/video* 查看摄像头驱动安装
