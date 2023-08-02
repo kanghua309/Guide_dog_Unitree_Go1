@@ -56,7 +56,7 @@ class CameraRepublisherNode(Node):
         if not ret:
             return
 
-        frame_left = frame[0:480, 300:600]
+        frame_left = frame[0:480, 0:600]
         img_left = self.bridge.cv2_to_imgmsg(frame_left, "bgr8")
 
         now = self.get_clock().now().to_msg()

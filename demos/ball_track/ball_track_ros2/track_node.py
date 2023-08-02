@@ -28,23 +28,18 @@ class AdaFollowRedBallDemo(Node):
         print("get image raw msg！")
         raw_img = self.bridge.imgmsg_to_cv2(msg, "bgr8")
         height, width, channels = raw_img.shape
-        print("1")
         crop_blurred_img = cv2.blur(raw_img, (5, 5))
         mask_img = self.floor_filter(crop_blurred_img)
-        print("2")  
         blurred_mask_img = cv2.GaussianBlur(mask_img, (5, 5), 1.5)
         binary_img = self.binarize_mask(blurred_mask_img)
-        print("3")
         num_labels, labels, stats, centroids = cv2.connectedComponentsWithStats(binary_img, connectivity=8)
-        print("4:",num_labels,labels,stats,centroids)
+        #print("4:",num_labels,labels,stats,centroids)
         try:
             largest_component_label = np.argmax(stats[1:, cv2.CC_STAT_AREA]) + 1
         except ValueError:
             self.get_logger().info('No red ball detected')
             if not self.no_ball:
-                print("xxxxx1")
                 self.stop_tracking()
-                print("xxxxx2")
                 self.no_ball = True
             self.publish_idle_mode(False)
         else:
@@ -57,10 +52,9 @@ class AdaFollowRedBallDemo(Node):
 
                 cv2.arrowedLine(raw_img, (width//2, height//2), (int(center_z), int(center_y)), color=(0, 255, 0),
                                 thickness=3, line_type=8, shift=0, tipLength=0.1)
-                print("Control gog head")
+                print("Control Dog Head ------------------>")
                 self.change_pitch_yaw(int(center_z), int(center_y), int(width//2), int(height//2))
                 self.publish_idle_mode(True)
-        print("show where")
         cv2.imshow("Detected Circle", raw_img)
         cv2.waitKey(3)
 
@@ -72,14 +66,14 @@ class AdaFollowRedBallDemo(Node):
         factor_z = float(dist_z) / float(middle_z)
 
         euler_cmd = HighCmd()
-        euler_cmd.head = bytes.fromhex('feef')
+        euler_cmd.head = np.frombuffer(bytes.fromhex('feef'),dtype=np.uint8)
         #euler_cmd.head = codecs.decode('feef', 'hex_codec')
-        euler_cmd.levelFlag = 0xee
+        euler_cmd.level_flag = 0xee
         euler_cmd.mode = 1
-        euler_cmd.gaitType = 1
+        euler_cmd.gait_type = 1
         euler_cmd.euler[1] = self.speed_y * factor_y
         euler_cmd.euler[2] = self.speed_z * factor_z
-        print("Pub euler cmd：",euler_cmd)
+        print("Pub Euler Cmd：",euler_cmd)
         self.publisher.publish(euler_cmd)
 
     def publish_idle_mode(self, status):
@@ -90,16 +84,12 @@ class AdaFollowRedBallDemo(Node):
     def stop_tracking(self):
         print("stop track")
         euler_cmd = HighCmd()
-        print("1")
-        euler_cmd.head = bytes.fromhex('feef')
-        print("2")
-        euler_cmd.levelFlag = 0xee
+        euler_cmd.head = np.frombuffer(bytes.fromhex('feef'),dtype=np.uint8)
+        euler_cmd.level_flag = 0xee
         euler_cmd.mode = 1
-        euler_cmd.gaitType = 1
+        euler_cmd.gait_type = 1
         euler_cmd.euler[1] = 0.0
         euler_cmd.euler[2] = 0.0
-        print("3")
-
         self.publisher.publish(euler_cmd)
 
     def floor_filter(self, image):
