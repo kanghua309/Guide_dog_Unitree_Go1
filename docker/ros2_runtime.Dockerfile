@@ -62,7 +62,7 @@ RUN --mount=type=ssh \
 WORKDIR $MY_WS
 RUN --mount=type=cache,target=/var/cache/apt \
     --mount=type=cache,target=/var/lib/apt \
-    apt-get update && rosdepc install -r -y \
+    apt-get update && rosdep install -r -y \
       --from-paths src/Guide_dog_Unitree_Go1/demos \
       --ignore-src \
       --rosdistro $ROS_DISTRO
