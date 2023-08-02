@@ -24,7 +24,7 @@ RUN pip config set global.index-url https://mirrors.aliyun.com/pypi/simple
 RUN pip config set install.trusted-host mirrors.aliyun.com
 
 #https://mirrors.tuna.tsinghua.edu.cn/help/ros2/
-RUN curl -sSL https://ghproxy.com/https://raw.githubusercontent.com/ros/rosdistro/master/ros.key  -o /usr/share/keyrings/ros-archive-keyring.gpg
+RUN curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key  -o /usr/share/keyrings/ros-archive-keyring.gpg
 RUN echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] https://mirrors.aliyun.com/ros2/ubuntu focal main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
 
 RUN apt-get update \
@@ -42,14 +42,14 @@ RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selectio
 USER root
 
 RUN apt-get -y update && apt-get install -y --no-install-recommends make gcc-8 g++-8 libglib2.0-dev 
-RUN cd /tmp && git clone https://ghproxy.com/https://github.com/lcm-proj/lcm.git && cd lcm && mkdir build && cd build && cmake .. && make -j && make install
+RUN cd /tmp && git clone https://github.com/lcm-proj/lcm.git && cd lcm && mkdir build && cd build && cmake .. && make -j && make install
 RUN cd /tmp/lcm/lcm-python && pip3 install -e .
 
 RUN pip3 install --no-cache-dir setuptools==58.2.0  picovoice==2.1.0 gTTS
 
 
 ENV ROS2_WS=/opt/ros/$ROS_DISTRO
-ENV GUIDE_DOG_REPO=https://ghproxy.com/https://github.com/kanghua309/Guide_dog_Unitree_Go1.git
+ENV GUIDE_DOG_REPO=https://github.com/kanghua309/Guide_dog_Unitree_Go1.git
 ENV GUIDE_DOG_BRANCH=main
 ENV MY_WS=$HOME/ros_ws
 
@@ -71,7 +71,7 @@ RUN --mount=type=cache,target=/var/cache/apt \
 ENV RMW_IMPLEMENTATION=rmw_fastrtps_cpp
 RUN --mount=type=cache,target=/root/.ccache \
     source $ROS2_WS/setup.bash \
-    && colcon build \
+    && colcon build --packages-select ball_track_ros2 republisher_ros2\
       --symlink-install
 
 # RUN echo "export RMW_IMPLEMENTATION=rmw_fastrtps_cpp" >> ~/.bashrc
