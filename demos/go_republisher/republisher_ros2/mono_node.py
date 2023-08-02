@@ -14,7 +14,7 @@ class CameraRepublisherNode(Node):
         #https://roboticsbackend.com/rclpy-params-tutorial-get-set-ros2-params-with-python/
         self.declare_parameter('camera_name', rclpy.Parameter.Type.STRING)
         self.declare_parameter('device_id', rclpy.Parameter.Type.INTEGER)
-        #self.declare_parameter('my_double_array', rclpy.Parameter.Type.DOUBLE_ARRAY)
+        self.declare_parameter('hz', rclpy.Parameter.Type.DOUBLE)
 
         #device_id = self.get_parameter('device_id').get_parameter_value().integer_value
         #camera_name = self.get_parameter('camera_name').get_parameter_value().string_value
@@ -22,6 +22,7 @@ class CameraRepublisherNode(Node):
 
         camera_name = self.get_parameter('camera_name')
         device_id = self.get_parameter('device_id')
+        hz = self.get_parameter('hz')
     
         self.get_logger().info("str: %s, int: %d " %
                             (str(camera_name.value),
@@ -47,8 +48,9 @@ class CameraRepublisherNode(Node):
         print("4")
 
         self.bridge = CvBridge()
-        self.timer = self.create_timer(2, self.publish_image)  # 25 Hz (1/25 = 0.04) ，也不知道为什么当在vmware中运行时，周期设置太小就会出现服务调用不通问题
-        print("5")
+
+        self.timer = self.create_timer(1/hz.value, self.publish_image)  # 25 Hz (1/25 = 0.04) ，也不知道为什么当在vmware中运行时，周期设置太小就会出现服务调用不通问题
+        print("5:",1/hz.value)
 
     def publish_image(self):
     

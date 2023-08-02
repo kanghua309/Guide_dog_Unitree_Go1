@@ -11,7 +11,10 @@ import numpy as np
 class AdaFollowRedBallDemo(Node):
     def __init__(self):
         super().__init__('ada_follow_red_ball_demo')
-        self.subscription = self.create_subscription(Image, '/camera_face/image_raw', self.image_callback, 10)
+
+        self.declare_parameter('camera_name', rclpy.Parameter.Type.STRING)
+        camera_name = self.get_parameter('camera_name')
+        self.subscription = self.create_subscription(Image, f'{camera_name.value}/image_raw', self.image_callback, 10)
         self.publisher = self.create_publisher(HighCmd, '/high_cmd', 10)
         self.bool_publisher = self.create_publisher(Bool, '/idle_mode_checker', 10)
 
