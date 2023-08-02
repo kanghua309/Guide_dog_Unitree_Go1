@@ -71,7 +71,7 @@ RUN --mount=type=cache,target=/var/cache/apt \
 ENV RMW_IMPLEMENTATION=rmw_fastrtps_cpp
 RUN --mount=type=cache,target=/root/.ccache \
     source $ROS2_WS/setup.bash \
-    && colcon build --packages-select ball_track_ros2 republisher_ros2\
+    && colcon build --packages-select ball_track_ros2 republisher_ros2 ros2_unitree_legged_msgs\
       --symlink-install
 
 # RUN echo "export RMW_IMPLEMENTATION=rmw_fastrtps_cpp" >> ~/.bashrc
