@@ -1,6 +1,6 @@
 #/bin/bash
 
-source /opt/foxy/setup.bash 
+source /opt/foxy/install/setup.bash 
 
 mkdir -p /root/ros_ws/src
 rm -rf /root/ros_ws/src/*

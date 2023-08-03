@@ -13,7 +13,8 @@ FROM ${TARGETARCH}_foxy_base as dev
 SHELL ["/bin/bash", "-c"]
 ENV SKIP_ROSDEP=""
 
-ENV ROS_DISTRO=foxy
+ENV ROS_DISTRO foxy
+ENV ROS_ROOT /opt/foxy
 ENV USERNAME root
 ENV HOME /root
 
@@ -76,9 +77,9 @@ ENV RMW_IMPLEMENTATION=rmw_fastrtps_cpp
 
 # RUN echo "export RMW_IMPLEMENTATION=rmw_fastrtps_cpp" >> ~/.bashrc
 
-COPY ./entrypoint.sh /
-RUN chmod +x /entrypoint.sh
-ENTRYPOINT ["/entrypoint.sh"]
+#COPY ./entrypoint.sh /
+#RUN chmod +x /entrypoint.sh
+#ENTRYPOINT ["/entrypoint.sh"]
 
-CMD ["bash"]
+#CMD ["bash"]
 
