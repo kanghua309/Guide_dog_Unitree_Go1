@@ -56,7 +56,7 @@ ENV MY_WS=$HOME/ros_ws
 RUN --mount=type=ssh mkdir -p -m 0700 ~/.ssh && ssh-keyscan github.com >> ~/.ssh/known_hosts
 WORKDIR $MY_WS/src
 RUN --mount=type=ssh \
-    git clone $GUIDE_DOG_REPO -b $GUIDE_DOG_BRANCH && 
+    git clone $GUIDE_DOG_REPO -b $GUIDE_DOG_BRANCH
 
 
 WORKDIR $MY_WS
