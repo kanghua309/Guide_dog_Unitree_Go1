@@ -77,6 +77,7 @@ RUN --mount=type=cache,target=/root/.ccache \
 # RUN echo "export RMW_IMPLEMENTATION=rmw_fastrtps_cpp" >> ~/.bashrc
 
 COPY ./entrypoint.sh /
+RUN chmod +x entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 
 CMD ["bash"]

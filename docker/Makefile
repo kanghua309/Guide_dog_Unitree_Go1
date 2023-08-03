@@ -24,13 +24,15 @@ run:
 		--volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
 		--env="XAUTHORITY=${XAUTH}" \
 		--volume="${XAUTH}:${XAUTH}" \
-		#--volume="/home/unitree/go1_gym:/home/isaac/go1_gym" \
+		--volume="/home/unitree/demo:/root/demo" \
 		--privileged \
 		--runtime=nvidia \
 		--net=host \
 		--workdir="/home/isaac/go1_gym" \  
 		--name="foxy_controller" \
 		jetson-model-deployment bash
+
+
 		
 autostart:
 	docker stop foxy_controller || true
@@ -41,12 +43,13 @@ autostart:
 		--volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
 		--env="XAUTHORITY=${XAUTH}" \
 		--volume="${XAUTH}:${XAUTH}" \
-		#--volume="/home/unitree/go1_gym:/home/isaac/go1_gym" \
+		#--volume="/home/unitree/go1_gym:/root/demo" \
 		--privileged \
 		--runtime=nvidia \
 		--net=host \
 		--workdir="/home/isaac/go1_gym" \
 		--name="foxy_controller" \
 		jetson-model-deployment tail -f /dev/null
-		docker start foxy_controller
-		docker exec foxy_controller bash -c 'cd /home/isaac/go1_gym/ && python3 setup.py install && cd go1_gym_deploy/scripts && ls && python3 deploy_policy.py'
+	docker start foxy_controller
+	docker exec foxy_controller bash -c 'sh /root/demo/build.sh && ls && ros2 launch ball_track_ros2 track.launch.py use_go1_repbulisher_msg:=true camera_name:=camera_face1 device_id:=0 hz:=25
+'
