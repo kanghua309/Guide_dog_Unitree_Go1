@@ -22,7 +22,6 @@ $ docker buildx create --name multi-platform --use --platform linux/amd64,linux/
 登陆自己的仓库账号
 $sudo docker login --username=kangh*****@msn.com registry.cn-hangzhou.aliyuncs.com
 
-
 编译ARM64的镜像
 DOCKER_BUILDKIT=1 docker build --platform linux/arm64 --ssh default=~/.ssh/id_rsa  -f ros2_dev_1.Dockerfile  -t ${REGISTRY}/ros2_guide_dog:latest  --push .
 

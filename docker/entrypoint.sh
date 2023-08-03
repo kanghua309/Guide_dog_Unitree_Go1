@@ -2,5 +2,5 @@
 set -e
 
 # setup ros environment
-source "/ros2_foxy/install/setup.bash"
+source "/opt/foxy/setup.bash"
 exec "$@"
