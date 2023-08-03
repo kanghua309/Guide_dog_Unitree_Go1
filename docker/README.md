@@ -8,8 +8,10 @@
 $ export REGISTRY=<your dockerhub username>
 # create new buildx that support multiple platforms
 #$ docker buildx create --use  --driver-opt network=host --name MultiPlatform
+
 $ docker buildx rm multi-platform
-$ docker buildx create --name multi-platform --use --platform linux/amd64,linux/arm64 --driver docker-container
+$ docker buildx create --name multi-platform --use --platform linux/amd64,linux/arm64 --driver docker-container --driver-opt network=host
+$ docker run --privileged --rm tonistiigi/binfmt --install all  #linux 需要安装 qemu
 
 # build the image for two different platforms and push the images
 #$ DOCKER_BUILDKIT=1 docker buildx build \
