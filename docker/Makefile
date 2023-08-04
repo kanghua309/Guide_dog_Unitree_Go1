@@ -12,7 +12,7 @@ ifdef PROXY
 		-t jetson-model-deployment \
 		--build-arg "HTTP_PROXY=${PROXY}" \
 		--build-arg "HTTPS_PROXY=${PROXY}" \
-		--no-cache=true \
+		--no-cache=false \
 		. -f ros2_runtime.Dockerfile 
 else 
 	docker buildx build --platform linux/arm64 \
@@ -27,14 +27,16 @@ run:
 	docker run -it \
 		--env="DISPLAY" \
 		--env="QT_X11_NO_MITSHM=1" \
-		--volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
 		--env="XAUTHORITY=${XAUTH}" \
+		--env="ROS_DISTRO=foxy" \
+                --env="ROS_ROOT=/opt/ros/foxy" \
+		--volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
 		--volume="${XAUTH}:${XAUTH}" \
 		--volume="/home/unitree/ros_ws:/root/ros_ws" \
 		--privileged \
 		--runtime=nvidia \
 		--net=host \
-		--workdir="/root/ros_ws" \  
+		--workdir="/root/ros_ws" \
 		--name="foxy_controller" \
 		jetson-model-deployment bash
 
@@ -46,8 +48,10 @@ autostart:
 	docker run -d\
 		--env="DISPLAY" \
 		--env="QT_X11_NO_MITSHM=1" \
-		--volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
 		--env="XAUTHORITY=${XAUTH}" \
+		--env="ROS_DISTRO=foxy" \
+		--env="ROS_ROOT=/opt/ros/foxy" \
+		--volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
 		--volume="${XAUTH}:${XAUTH}" \
 		--volume="/home/unitree/ros_ws:/root/ros_ws" \
 		--privileged \
@@ -57,4 +61,4 @@ autostart:
 		--name="foxy_controller" \
 		jetson-model-deployment tail -f /dev/null
 	docker start foxy_controller
-	docker exec foxy_controller bash -c 'bash -x /root/ros_ws/demos/build.sh && ls && ros2 launch ball_track_ros2 track.launch.py use_go1_repbulisher_msg:=true camera_name:=camera_face1 device_id:=0 hz:=25'
+	docker exec foxy_controller bash -c 'bash /root/ros_ws/demos/build.sh && ls && ros2 launch ball_track_ros2 track.launch.py use_go1_repbulisher_msg:=true camera_name:=camera_face1 device_id:=0 hz:=25'

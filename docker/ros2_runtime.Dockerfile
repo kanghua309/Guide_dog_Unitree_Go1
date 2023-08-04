@@ -42,9 +42,14 @@ RUN apt-get update \
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
 USER root
 
+RUN pip3 install --no-cache-dir setuptools==58.2.0
+
 RUN apt-get -y update && apt-get install -y --no-install-recommends make gcc-8 g++-8 libglib2.0-dev 
 RUN cd /tmp && git clone https://github.com/lcm-proj/lcm.git && cd lcm && mkdir build && cd build && cmake .. && make -j && make install
 RUN cd /tmp/lcm/lcm-python && pip3 install -e .
+
+
+RUN rosdep update --include-eol-distros
 
 #RUN pip3 install --no-cache-dir setuptools==58.2.0  picovoice==2.1.0 gTTS
 
