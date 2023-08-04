@@ -14,7 +14,7 @@ SHELL ["/bin/bash", "-c"]
 ENV SKIP_ROSDEP=""
 
 ENV ROS_DISTRO foxy
-ENV ROS_ROOT /opt/foxy
+ENV ROS_ROOT /opt/ros/foxy
 ENV USERNAME root
 ENV HOME /root
 
