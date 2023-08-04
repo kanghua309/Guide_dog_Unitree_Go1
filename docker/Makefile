@@ -1,18 +1,26 @@
-default: build
-build:
-	docker build -t jetson-model-deployment . -f ros2_runtime.Dockerfile
-clean-build:
-	docker build -t jetson-model-deployment . -f ros2_runtime.Dockerfile --no-cache=true
+default: build_arm64
 
+#build:
+#	docker build -t jetson-model-deployment . -f ros2_runtime.Dockerfile
+#clean-build:
+#	docker build -t jetson-model-deployment . -f ros2_runtime.Dockerfile --no-cache=true
 build_arm64:
-	
-	docker buildx build --platform linux/arm64 \
-	-o type=tar,dest=deployment_image.tar \
-        -t jetson-model-deployment \
-	--build-arg "HTTP_PROXY=${PROXY}" \
-	--build-arg "HTTPS_PROXY=${PROXY}" \
-	. -f ros2_runtime.Dockerfile 
 
+ifdef PROXY
+	docker buildx build --platform linux/arm64 \
+		-o type=tar,dest=deployment_image.tar \
+		-t jetson-model-deployment \
+		--build-arg "HTTP_PROXY=${PROXY}" \
+		--build-arg "HTTPS_PROXY=${PROXY}" \
+		--no-cache=true \
+		. -f ros2_runtime.Dockerfile 
+else 
+	docker buildx build --platform linux/arm64 \
+		-o type=tar,dest=deployment_image.tar \
+		-t jetson-model-deployment \
+		--no-cache=true \
+		. -f ros2_runtime.Dockerfile
+endif
 run:
 	docker stop foxy_controller || true
 	docker rm foxy_controller || true
