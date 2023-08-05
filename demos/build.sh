@@ -16,6 +16,5 @@ colcon build --packages-select \
        ros2_unitree_legged_msgs \
        --base-paths src 
 
-source /root/ros_ws/install/setup.bash
 echo "Build Over ..."
 
