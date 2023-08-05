@@ -51,7 +51,7 @@ RUN pip3 install --no-cache-dir setuptools==58.2.0  picovoice==2.1.0 gTTS
 
 RUN pip3 install rosdep
 RUN rosdep init 
-RUN rosdep update  --include-eol-distros foxy
+RUN rosdep update --include-eol-distros foxy
 
 ENV ROS2_WS=/opt/ros/$ROS_DISTRO
 ENV GUIDE_DOG_REPO=https://ghproxy.com/https://github.com/kanghua309/Guide_dog_Unitree_Go1.git

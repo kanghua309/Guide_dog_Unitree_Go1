@@ -1,3 +1,10 @@
+
+我们尝试将demo ros package 通过docker 部署到go1上！
+demos 中的的包依赖 ros2_unitree_legged_msgs（用于给狗发送命令），所以先再demos 下下载该包
+```
+svn checkout https://github.com/kanghua309/unitree_ros2/trunk/ros2_unitree_legged_msgs
+```
+
 制作部署镜像,在当前目录下产生deployment_image.tar镜像压缩问价加
 ```
 cd docker
