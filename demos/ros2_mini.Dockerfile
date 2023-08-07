@@ -23,11 +23,16 @@ RUN apt-get update \
        python3-pip \
        ros-foxy-cv-bridge \
        python3-cv-bridge \
+       libglib2.0-dev \
+       libboost-all-dev \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* 
 
+RUN cd /tmp && git clone https://github.com/lcm-proj/lcm.git && cd lcm && mkdir build && cd build && cmake .. && make -j && make install && rm -rf /tmp/lcm
+
+
 #https://blog.csdn.net/JasonXu94/article/details/129698868
-RUN pip config set global.index-url https://mirrors.aliyun.com/pypi/simple 
-RUN pip config set install.trusted-host mirrors.aliyun.com
-RUN pip3 install --no-cache-dir setuptools==58.2.0
-RUN pip install opencv-python-headless -i https://pypi.tuna.tsinghua.edu.cn/simple
+RUN pip3 config set global.index-url https://mirrors.aliyun.com/pypi/simple \
+&& pip3 config set install.trusted-host mirrors.aliyun.com \
+&& pip3 install --no-cache-dir setuptools==58.2.0 \
+&& pip3 install opencv-python-headless
