@@ -93,7 +93,7 @@ docker-autostart-app: # Run Demo Docker With App Start
 		--name="foxy_controller" \
 		jetson-model-deployment tail -f /dev/null
 	docker start foxy_controller
-	docker exec foxy_controller bash -c 'source ${ROS_ROOT}/setup.bash && ros2 launch ball_track_ros2 track.launch.py use_go1_repbulisher_msg:=true camera_name:=camera_face1 device_id:=0 hz:=25'
+	docker exec foxy_controller bash -c 'source /root/ros_ws/install/setup.bash && ros2 launch ball_track_ros2 track.launch.py use_go1_repbulisher_msg:=true camera_name:=camera_face1 device_id:=0 hz:=25'
 
 #=Demo Deploy Commands
 
