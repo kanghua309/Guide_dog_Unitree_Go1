@@ -6,7 +6,31 @@
 如何使用，请看
 ```
 make help
+
+-->output
+Default Command:
+  help Shows the available make commands.
+
+Image Commands:
+  image-build Build image For Demos
+  image-import Import Demo Image From Jar Repo 
+
+Docker Commands:
+  docker-run Run Demo Docker Base 
+  docker-build-app Run Demo Docker And Build Demo
+  docker-autostart-app Run Demo Docker With App Start
+
+Demo Deploy Commands:
+  demo-deploy Deploy Demo To Unitree Head Board
 ```
+1. 创建demo docker image tar 
+make image-build 
+2. 部署demo 到目标板卡的目标位置
+make demo-deploy
+3. 将domo image tar 导入image repos
+make image-import
+4. 启动docker并编译docker app
+make docker-build-app
 
 
 其他：
