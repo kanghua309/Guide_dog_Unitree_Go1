@@ -92,4 +92,10 @@ docker_autostart:
 	docker exec foxy_controller bash -c 'source ${ROS_ROOT}/setup.bash && ros2 launch ball_track_ros2 track.launch.py use_go1_repbulisher_msg:=true camera_name:=camera_face1 device_id:=0 hz:=25'
 
 demo_deploy:
-	rsync -av -e ssh --exclude=*.pt --exclude=*.mp4 $PWD/../deploy $PWD/../docker $PWD/../demos unitree@192.168.123.15:/home/unitree/ros_ws
+    git clone git@github.com:kanghua309/unitree_ros2.git 
+	mv ros2_unitree_legged_msgs .
+	mv unitree_legged_real .
+	rm -rf unitree_ros2
+	#rsync -av -e ssh --exclude=*.pt --exclude=*.mp4 $PWD/../deploy $PWD/../docker $PWD/../demos unitree@192.168.123.15:/home/unitree/ros_ws
+	rsync -av -e ssh --exclude=*.Dockerfile $PWD/../deploy $PWD/../docker $PWD/../demos unitree@192.168.123.13:/home/unitree/ros_ws
+
