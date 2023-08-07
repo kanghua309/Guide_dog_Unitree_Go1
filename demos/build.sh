@@ -1,13 +1,12 @@
 #/bin/bash
 
-source /opt/ros/foxy/install/setup.bash 
+source ${ROS_ROOT}/setup.bash 
 
-mkdir -p /root/ros_ws/src
-rm -rf /root/ros_ws/src/*
+mkdir -p /root/ros_ws/src && rm -rf /root/ros_ws/src/*
 cp -rf /root/ros_ws/demos /root/ros_ws/src
 cd /root/ros_ws
 
-rosdep install -r -y  --from-paths src --ignore-src 
+#rosdep install -r -y  --from-paths src --ignore-src 
 echo "Dep Install Over ..."
 
 colcon build --packages-select \
