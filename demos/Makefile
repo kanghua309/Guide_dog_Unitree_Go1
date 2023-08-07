@@ -1,16 +1,18 @@
-default: build_image
+#=Default Command
 
+.PHONY: help
+help: # Shows the available make commands.
+	@sed -nr \
+		-e 's|^#=(.*)|\n\1:|p' \
+		-e 's|^([a-zA-Z-]*):((.*?)# (.*))?|  \1 \4|p' \
+		$(lastword $(MAKEFILE_LIST)) \
+		| expand -t20
 
-.PHONY: no_targets__ list
-no_targets__:
-list:
-	@sh -c "$(MAKE) -p no_targets__ | awk -F':' '/^[a-zA-Z0-9][^\$$#\/\\t=]*:([^=]|$$)/ {split(\$$1,A,/ /);for(i in A)print A[i]}' | grep -v '__\$$' | sort"
+#=Image Commands
 
-# get_depend:
-# 	svn checkout https://github.com/kanghua309/unitree_ros2/trunk/ros2_unitree_legged_msgs
-# 	svn checkout https://github.com/kanghua309/unitree_ros2/trunk/unitree_legged_real
+.PHONY: image-build image-import
 
-image_build:
+image-build: # Build image For Demos
 ifdef PROXY
 	docker buildx build --platform linux/arm64 \
 		-o type=tar,dest=deployment_image.tar \
@@ -27,11 +29,14 @@ else
 		. -f ros2_mini.Dockerfile
 endif
 
-
-image_import:
+image-import: # Import Demo Image From Jar Repo 
 	@cat deployment_image.tar | docker import - jetson-model-deployment
 
-docker_run:
+#=Docker Commands
+
+.PHONY: docker-run docker-buiild-app docker-autostart-app
+
+docker-run: # Run Demo Docker Base 
 	docker stop foxy_controller || true
 	docker rm foxy_controller || true
 	docker run -it \
@@ -50,7 +55,7 @@ docker_run:
 		--name="foxy_controller" \
 		jetson-model-deployment bash
 
-docker_buiild_app:
+docker-buiild-app: # Run Demo Docker And Build Demo
 	docker run -d	\
 		--env="DISPLAY" \
 		--env="QT_X11_NO_MITSHM=1" \
@@ -69,8 +74,7 @@ docker_buiild_app:
 	docker start foxy_controller
 	docker exec foxy_controller bash -c 'bash /root/ros_ws/demos/build.sh'
 
-
-docker_autostart:
+docker-autostart-app: # Run Demo Docker With App Start
 	docker stop foxy_controller || true
 	docker rm foxy_controller || true
 	docker run -d\
@@ -91,7 +95,11 @@ docker_autostart:
 	docker start foxy_controller
 	docker exec foxy_controller bash -c 'source ${ROS_ROOT}/setup.bash && ros2 launch ball_track_ros2 track.launch.py use_go1_repbulisher_msg:=true camera_name:=camera_face1 device_id:=0 hz:=25'
 
-demo_deploy:
+#=Demo Deploy Commands
+
+.PHONY: demo-deploy
+
+demo-deploy: # Deploy Demo To Unitree Head Board
     git clone git@github.com:kanghua309/unitree_ros2.git 
 	mv ros2_unitree_legged_msgs .
 	mv unitree_legged_real .
