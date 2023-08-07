@@ -34,7 +34,7 @@ image-import: # Import Demo Image From Jar Repo
 
 #=Docker Commands
 
-.PHONY: docker-run docker-buiild-app docker-autostart-app
+.PHONY: docker-run docker-build-app docker-autostart-app
 
 docker-run: # Run Demo Docker Base 
 	docker stop foxy_controller || true
@@ -55,7 +55,7 @@ docker-run: # Run Demo Docker Base
 		--name="foxy_controller" \
 		jetson-model-deployment bash
 
-docker-buiild-app: # Run Demo Docker And Build Demo
+docker-build-app: # Run Demo Docker And Build Demo
 	docker run -d	\
 		--env="DISPLAY" \
 		--env="QT_X11_NO_MITSHM=1" \
