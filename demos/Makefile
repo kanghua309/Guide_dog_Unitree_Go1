@@ -100,10 +100,13 @@ docker-autostart-app: # Run Demo Docker With App Start
 .PHONY: demo-deploy
 
 demo-deploy: # Deploy Demo To Unitree Head Board
-    git clone git@github.com:kanghua309/unitree_ros2.git 
-	mv ros2_unitree_legged_msgs .
-	mv unitree_legged_real .
-	rm -rf unitree_ros2
+	if [ ! -d 'unitree_ros2' ]; then	\
+	   git clone git@github.com:kanghua309/unitree_ros2.git; \
+	   mv unitree_ros2/ros2_unitree_legged_msgs .; \
+	   mv unitree_ros2/unitree_legged_real .;\
+	fi
+	#rm -rf unitree_ros2
 	#rsync -av -e ssh --exclude=*.pt --exclude=*.mp4 $PWD/../deploy $PWD/../docker $PWD/../demos unitree@192.168.123.15:/home/unitree/ros_ws
-	rsync -av -e ssh --exclude=*.Dockerfile $PWD/../deploy $PWD/../docker $PWD/../demos unitree@192.168.123.13:/home/unitree/ros_ws
+	#rsync -av -e ssh --exclude=*.Dockerfile $PWD/../deploy $PWD/../docker $PWD/../demos unitree@192.168.123.13:/home/unitree/ros_ws
+	rsync -av -e ssh --exclude=*.Dockerfile ${PWD}/../demos king@127.0.0.1:/home/king/unitree/ros_ws
 
