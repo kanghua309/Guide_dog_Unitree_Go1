@@ -100,7 +100,7 @@ docker-autostart-app: # Run Demo Docker With App Start
 .PHONY: demo-deploy
 
 demo-deploy: # Deploy Demo To Unitree Head Board
-    git clone git@github.com:kanghua309/unitree_ros2.git 
+	git clone git@github.com:kanghua309/unitree_ros2.git 
 	mv ros2_unitree_legged_msgs .
 	mv unitree_legged_real .
 	rm -rf unitree_ros2
