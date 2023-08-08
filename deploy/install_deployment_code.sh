@@ -13,8 +13,7 @@ if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
 then
     # load docker image
     echo "[Step 1] Extracting docker image..."
-    #docker load -i ../deploy/deployment_image.tar
-    cat ../deploy/deployment_image.tar | docker import - jetson-model-deployment
+    docker load -i ../deploy/deployment_image.tar
     printf "\nDone!\n"
 else
     echo "Quitting"

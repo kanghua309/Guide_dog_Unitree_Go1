@@ -22,6 +22,7 @@ RUN apt-get update \
     && apt-get install --yes --no-install-recommends \
        python3-pip \
        ros-foxy-cv-bridge \
+       ros-foxy-xacro \
        python3-cv-bridge \
        libglib2.0-dev \
        libboost-all-dev \

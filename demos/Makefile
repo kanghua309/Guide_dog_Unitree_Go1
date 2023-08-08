@@ -2,7 +2,7 @@
 
 .PHONY: help
 help: # Shows the available make commands.
-	@sed -nr \
+	@gsed -nr \
 		-e 's|^#=(.*)|\n\1:|p' \
 		-e 's|^([a-zA-Z-]*):((.*?)# (.*))?|  \1 \4|p' \
 		$(lastword $(MAKEFILE_LIST)) \
@@ -49,13 +49,14 @@ docker-run: # Run Demo Docker Base
 		--volume="${XAUTH}:${XAUTH}" \
 		--volume="/home/unitree/ros_ws:/root/ros_ws" \
 		--privileged \
-		--runtime=nvidia \
 		--net=host \
 		--workdir="/root/ros_ws" \
 		--name="foxy_controller" \
 		jetson-model-deployment bash
 
 docker-build-app: # Run Demo Docker And Build Demo
+	docker stop foxy_controller || true
+	docker rm foxy_controller || true
 	docker run -d	\
 		--env="DISPLAY" \
 		--env="QT_X11_NO_MITSHM=1" \
@@ -66,7 +67,6 @@ docker-build-app: # Run Demo Docker And Build Demo
 		--volume="${XAUTH}:${XAUTH}" \
 		--volume="/home/unitree/ros_ws:/root/ros_ws" \
 		--privileged \
-		--runtime=nvidia \
 		--net=host \
 		--workdir="/root/ros_ws" \
 		--name="foxy_controller" \
@@ -87,7 +87,6 @@ docker-autostart-app: # Run Demo Docker With App Start
 		--volume="${XAUTH}:${XAUTH}" \
 		--volume="/home/unitree/ros_ws:/root/ros_ws" \
 		--privileged \
-		--runtime=nvidia \
 		--net=host \
 		--workdir="/root/ros_ws" \
 		--name="foxy_controller" \
@@ -102,8 +101,7 @@ docker-autostart-app: # Run Demo Docker With App Start
 demo-deploy: # Deploy Demo To Unitree Head Board
 	if [ ! -d 'unitree_ros2' ]; then	\
 	   git clone git@github.com:kanghua309/unitree_ros2.git; \
-	   mv unitree_ros2/ros2_unitree_legged_msgs .; \
-	   mv unitree_ros2/unitree_legged_real .;\
+	   mv unitree_ros2/* .; \
 	fi
 	#rm -rf unitree_ros2
 	#rsync -av -e ssh --exclude=*.pt --exclude=*.mp4 $PWD/../deploy $PWD/../docker $PWD/../demos unitree@192.168.123.15:/home/unitree/ros_ws
