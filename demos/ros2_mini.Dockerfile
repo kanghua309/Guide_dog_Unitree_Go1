@@ -35,4 +35,4 @@ RUN cd /tmp && git clone https://github.com/lcm-proj/lcm.git && cd lcm && mkdir 
 RUN pip3 config set global.index-url https://mirrors.aliyun.com/pypi/simple \
 && pip3 config set install.trusted-host mirrors.aliyun.com \
 && pip3 install --no-cache-dir setuptools==58.2.0 \
-&& pip3 install opencv-python-headless
+&& pip3 install --no-cache-dir opencv-python-headless
