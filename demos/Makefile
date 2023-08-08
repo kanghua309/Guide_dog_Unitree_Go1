@@ -2,7 +2,7 @@
 
 .PHONY: help
 help: # Shows the available make commands.
-	@gsed -nr \
+	@sed -nr \
 		-e 's|^#=(.*)|\n\1:|p' \
 		-e 's|^([a-zA-Z-]*):((.*?)# (.*))?|  \1 \4|p' \
 		$(lastword $(MAKEFILE_LIST)) \
