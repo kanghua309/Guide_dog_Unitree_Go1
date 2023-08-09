@@ -1,5 +1,14 @@
 #=Default Command
 
+DEFAULT_DOCKER_RUNTIME = “nvidia”
+DEFAULT_HOST_MAP_WORKDIR = “/home/unitree/ros_ws”
+
+
+# test:
+# 	echo ${PROXY}
+# 	echo ${DEFAULT_HOST_MAP_WORKDIR}
+# 	echo ${DEFAULT_DOCKER_RUNTIME}
+
 .PHONY: help
 help: # Shows the available make commands.
 	@sed -nr \
@@ -47,7 +56,8 @@ docker-run: # Run Demo Docker Base
                 --env="ROS_ROOT=/opt/ros/foxy" \
 		--volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
 		--volume="${XAUTH}:${XAUTH}" \
-		--volume="/home/unitree/ros_ws:/root/ros_ws" \
+		--volume="${DEFAULT_HOST_MAP_WORKDIR}:/root/ros_ws" \
+		--runtime=${DEFAULT_DOCKER_RUNTIME} \
 		--privileged \
 		--net=host \
 		--workdir="/root/ros_ws" \
@@ -65,7 +75,8 @@ docker-build-app: # Run Demo Docker And Build Demo
 		--env="ROS_ROOT=/opt/ros/foxy" \
 		--volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
 		--volume="${XAUTH}:${XAUTH}" \
-		--volume="/home/unitree/ros_ws:/root/ros_ws" \
+		--volume="${DEFAULT_HOST_MAP_WORKDIR}:/root/ros_ws" \
+		--runtime=${DEFAULT_DOCKER_RUNTIME} \
 		--privileged \
 		--net=host \
 		--workdir="/root/ros_ws" \
@@ -77,7 +88,7 @@ docker-build-app: # Run Demo Docker And Build Demo
 docker-autostart-app: # Run Demo Docker With App Start
 	docker stop foxy_controller || true
 	docker rm foxy_controller || true
-	docker run -d\
+	docker run -d	\
 		--env="DISPLAY" \
 		--env="QT_X11_NO_MITSHM=1" \
 		--env="XAUTHORITY=${XAUTH}" \
@@ -85,7 +96,8 @@ docker-autostart-app: # Run Demo Docker With App Start
 		--env="ROS_ROOT=/opt/ros/foxy" \
 		--volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
 		--volume="${XAUTH}:${XAUTH}" \
-		--volume="/home/unitree/ros_ws:/root/ros_ws" \
+		--volume="${DEFAULT_HOST_MAP_WORKDIR}:/root/ros_ws" \
+		--runtime=${DEFAULT_DOCKER_RUNTIME} \
 		--privileged \
 		--net=host \
 		--workdir="/root/ros_ws" \
