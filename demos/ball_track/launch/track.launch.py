@@ -10,6 +10,7 @@ from launch.substitutions import PathJoinSubstitution, LaunchConfiguration
 from launch_ros.substitutions import FindPackageShare
 
 
+
 def generate_launch_description():
     return LaunchDescription([
 
@@ -40,6 +41,19 @@ def generate_launch_description():
                         default_value='0.5',
                         description='Hz For CreateTimer'
                     ),
+
+        IncludeLaunchDescription(
+            PythonLaunchDescriptionSource(
+                PathJoinSubstitution([
+                    FindPackageShare('unitree_legged_real'),
+                    'launch',
+                    'high.launch.py'
+                ])
+            ),
+            launch_arguments=[
+                ('use_rviz', 'false'),
+            ],
+        ),
 
         Node(
             package='republisher_ros2',
