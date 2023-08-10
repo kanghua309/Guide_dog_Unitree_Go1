@@ -1,25 +1,57 @@
-# Unitree ROS2
+该demo的任务是：让go1 嫩识别红色球，并狗头能跟着红色球的方向转动 —— 代码参考了https://github.com/aatb-ch/go1_republisher 和 网友相关代码 ，我们改造位foxy 版本！
+其中go_republisher 目的是把摄像头消息转化为ros2 的msg，并重新发布为新的topic 
+其中ball_track 目的是订阅摄像头信息，并识别红色球的移动方向，最后再发送high_cmd主题消息（该消息发给下面提到的high cmd 处理节点）
+其中还需要包含git@github.com:kanghua309/unitree_ros2.git 下的两个包（分别是msg 和 high cmd的处理包 -- 该包将消息发送给192.168.123.161上的控制服务）
 
-**Authors**: Katie Hughes, Nick Morales
+如何使用，请看
+```
+make help
 
-This is a set of ROS2 packages designed to control the Unitree Go1 robot. This repository was forked from 
-[Unitree's 'Ros2 to Real'](https://github.com/unitreerobotics/unitree_ros2_to_real) package with some modifications to make adding custom control more streamlined. It also includes a copy of [unitree_legged_sdk v3.5.1](https://github.com/unitreerobotics/unitree_legged_sdk/releases/tag/v3.5.1).
+-->output
+Help Commands:
+  help Shows the available make commands.
 
-## How to run
-1. Clone this repository in `unitree_ws/src`.
-2. In `unitree_ws`, run `colcon build`. There is a warning about `BOOST_PRAGMA_MESSAGE` that I do not know how to resolve at the moment, but otherwise should build without error.
-3. In another terminal, run `source install/setup.bash`
-   
-   (If running the low level controls, ensure that the dog is raised off the ground in the harness before executing the next steps!! Before raising it off the floor, you will need to press L2+A to sit the robot down and then L1+L2+start to put the robot into the correct mode -- otherwise, the robot will flail its legs when it leaves the floor.)
+Image Commands:
+  image-build Build image For Demos
+  image-import Import Demo Image From Jar Repo 
 
-4. To load the robot and connect to it via UDP communication, run `ros2 launch unitree_legged_real low.launch.py` (low level controls) or `ros2 launch unitree_legged_real high.launch.py` (high level controls).
+Docker Commands:
+  docker-run Run Demo Docker Base 
+  docker-build-app Run Demo Docker And Build Demo
+  docker-autostart-app Run Demo Docker With App Start
 
-## Low Level Executables:
-Again, before running any low level controls, ensure that the dog is safely raised off the ground in the harness.
-* `udp_low`: This takes the framework defined in Unitree's `ros2_udp` and translates it into a more traditional ROS2 C++ node. Additionally, this also fixes a bug where you can only read robot state messages if you are currently publishing joint commands. Finally, this also adds a joint state publisher that is connected to the joint messages received for visualizaiton in rviz.
-* `jsp_low`: ROS2 C++ node for low level joint state publishing. It subscribes either to the `low_state` or `low_cmd` topic (depending on the `js_source` parameter) and publishes joint states present in the message.
-* `custom_gait`: This takes the framework defined in Unitree's `ros2_position_example` and translates it into a more traditional ROS2 C++ node. This also enables multi-joint control. In the future it will also subscribe to the `low_state` message from the Go1 in order for more precise control. In order for this node to physically move the dog, `custom_udp` must also be running.
+Demo Deploy Commands:
+  demo-deploy Deploy Demo To Unitree Head Board
 
-## High Level Executables:
-* `udp_high` - ROS2 C++ node for high level UDP pass command and state pass through. It subscribes to the `high_cmd` topic, converts these commands to a UDP message, and sends it to the Go1. It publishes state (received over UDP from the Go1) to the `high_state` topic.
-* `jsp_high` - ROS2 C++ node for high level joint state publishing. It subscribes to the `high_state` topic and publishes joint states present in the state message.
+------------------------------------------------------------
+PROXY VAR IS 
+DEFAULT_HOST_MAP_WORKDIR VAR IS /home/unitree/ros_ws
+DEFAULT_DOCKER_RUNTIME VAR IS nvidia
+------------------------------------------------------------
+```
+
+1. 创建demo docker image tar 
+```
+make image-build 
+or 
+PROXY=<your proxy address> make -e image-build #eg. PROXY=192.168.31.250:7890 make -e image-build
+```
+2. 部署demo 到目标板卡的目标位置
+```
+make demo-deploy
+or
+DEFAULT_DEPLOY_HOST_WORKDIR=/tmp/ros_ws DEFAULT_DEPLOY_HOST_LOCATION=king@127.0.0.1 make -e demo-deploy #为了测试目的
+```
+3. 将domo image tar 导入image repos
+make image-import
+4. 启动docker并编译docker app
+```
+make docker-build-app
+or
+DEFAULT_DOCKER_RUNTIME=runc DEFAULT_DEPLOY_HOST_WORKDIR=/home/unitree/ros_ws make -e docker-build-app
+``
+
+
+其他：
+如何缩小镜像，变成runtime 的，而不是devel的
+https://unrealcontainers.com/blog/identifying-application-runtime-dependencies/

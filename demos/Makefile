@@ -1,14 +1,11 @@
-#=Default Command
-
-DEFAULT_DOCKER_RUNTIME = “nvidia”
-DEFAULT_HOST_MAP_WORKDIR = “/home/unitree/ros_ws”
 
 
-# test:
-# 	echo ${PROXY}
-# 	echo ${DEFAULT_HOST_MAP_WORKDIR}
-# 	echo ${DEFAULT_DOCKER_RUNTIME}
+DEFAULT_DOCKER_RUNTIME = "nvidia"
+DEFAULT_DEPLOY_HOST_WORKDIR = "/home/unitree/ros_ws"
+DEFAULT_DEPLOY_HOST_LOCATION="unitree@192.168.123.15"
 
+
+#=Help Commands
 .PHONY: help
 help: # Shows the available make commands.
 	@sed -nr \
@@ -16,11 +13,17 @@ help: # Shows the available make commands.
 		-e 's|^([a-zA-Z-]*):((.*?)# (.*))?|  \1 \4|p' \
 		$(lastword $(MAKEFILE_LIST)) \
 		| expand -t20
+	@echo ""
+	@echo "------------------------------------------------------------"
+	@echo "PROXY VAR IS ${PROXY}"
+	@echo "DEFAULT_DOCKER_RUNTIME VAR IS ${DEFAULT_DOCKER_RUNTIME}"
+	@echo "DEFAULT_DEPLOY_HOST_WORKDIR VAR IS ${DEFAULT_DEPLOY_HOST_WORKDIR}"
+	@echo "DEFAULT_DEPLOY_HOST_LOCATION VAR IS ${DEFAULT_DEPLOY_HOST_LOCATION}"
+	@echo "------------------------------------------------------------"
+
 
 #=Image Commands
-
 .PHONY: image-build image-import
-
 image-build: # Build image For Demos
 ifdef PROXY
 	docker buildx build --platform linux/arm64 \
@@ -42,9 +45,7 @@ image-import: # Import Demo Image From Jar Repo
 	@cat deployment_image.tar | docker import - jetson-model-deployment
 
 #=Docker Commands
-
 .PHONY: docker-run docker-build-app docker-autostart-app
-
 docker-run: # Run Demo Docker Base 
 	docker stop foxy_controller || true
 	docker rm foxy_controller || true
@@ -56,7 +57,7 @@ docker-run: # Run Demo Docker Base
                 --env="ROS_ROOT=/opt/ros/foxy" \
 		--volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
 		--volume="${XAUTH}:${XAUTH}" \
-		--volume="${DEFAULT_HOST_MAP_WORKDIR}:/root/ros_ws" \
+		--volume="${DEFAULT_DEPLOY_HOST_WORKDIR}:/root/ros_ws" \
 		--runtime=${DEFAULT_DOCKER_RUNTIME} \
 		--privileged \
 		--net=host \
@@ -75,7 +76,7 @@ docker-build-app: # Run Demo Docker And Build Demo
 		--env="ROS_ROOT=/opt/ros/foxy" \
 		--volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
 		--volume="${XAUTH}:${XAUTH}" \
-		--volume="${DEFAULT_HOST_MAP_WORKDIR}:/root/ros_ws" \
+		--volume="${DEFAULT_DEPLOY_HOST_WORKDIR}:/root/ros_ws" \
 		--runtime=${DEFAULT_DOCKER_RUNTIME} \
 		--privileged \
 		--net=host \
@@ -96,7 +97,7 @@ docker-autostart-app: # Run Demo Docker With App Start
 		--env="ROS_ROOT=/opt/ros/foxy" \
 		--volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
 		--volume="${XAUTH}:${XAUTH}" \
-		--volume="${DEFAULT_HOST_MAP_WORKDIR}:/root/ros_ws" \
+		--volume="${DEFAULT_DEPLOY_HOST_WORKDIR}:/root/ros_ws" \
 		--runtime=${DEFAULT_DOCKER_RUNTIME} \
 		--privileged \
 		--net=host \
@@ -107,9 +108,7 @@ docker-autostart-app: # Run Demo Docker With App Start
 	docker exec foxy_controller bash -c 'source /root/ros_ws/install/setup.bash && ros2 launch ball_track_ros2 track.launch.py use_go1_repbulisher_msg:=true camera_name:=camera_face1 device_id:=0 hz:=25'
 
 #=Demo Deploy Commands
-
 .PHONY: demo-deploy
-
 demo-deploy: # Deploy Demo To Unitree Head Board
 	if [ ! -d 'unitree_ros2' ]; then	\
 	   git clone git@github.com:kanghua309/unitree_ros2.git; \
@@ -118,5 +117,5 @@ demo-deploy: # Deploy Demo To Unitree Head Board
 	#rm -rf unitree_ros2
 	#rsync -av -e ssh --exclude=*.pt --exclude=*.mp4 $PWD/../deploy $PWD/../docker $PWD/../demos unitree@192.168.123.15:/home/unitree/ros_ws
 	#rsync -av -e ssh --exclude=*.Dockerfile $PWD/../deploy $PWD/../docker $PWD/../demos unitree@192.168.123.13:/home/unitree/ros_ws
-	rsync -av -e ssh --exclude=*.Dockerfile ${PWD}/../demos king@127.0.0.1:/home/king/unitree/ros_ws
+	rsync -av -e ssh --exclude=*.Dockerfile ${PWD}/../demos ${DEFAULT_DEPLOY_HOST_LOCATION}:${DEFAULT_DEPLOY_HOST_WORKDIR}
 
