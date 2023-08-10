@@ -23,15 +23,15 @@ help: # Shows the available make commands.
 
 
 #=Image Commands
-.PHONY: image-build image-import
-image-build: # Build image For Demos
+.PHONY: image-build image-import image-clean
+image-build: # :Build image For Demos
 ifdef PROXY
 	docker buildx build --platform linux/arm64 \
 		-o type=tar,dest=deployment_image.tar \
 		-t jetson-model-deployment \
 		--build-arg "HTTP_PROXY=${PROXY}" \
 		--build-arg "HTTPS_PROXY=${PROXY}" \
-		--no-cache=false \
+		--no-cache=true \
 		. -f ros2_mini.Dockerfile 
 else 
 	docker buildx build --platform linux/arm64 \
@@ -41,12 +41,18 @@ else
 		. -f ros2_mini.Dockerfile
 endif
 
-image-import: # Import Demo Image From Jar Repo 
+image-import: # :Import Demo Image From Jar Repo 
 	@cat deployment_image.tar | docker import - jetson-model-deployment
 
+image-clean: # :Remove Image From Repo
+	@docker stop foxy_controller || true
+	@docker rm foxy_controller || true
+	@docker image rm jetson-model-deployment
+	@rm jetson-model-deployment
+
 #=Docker Commands
-.PHONY: docker-run docker-build-app docker-autostart-app
-docker-run: # Run Demo Docker Base 
+.PHONY: docker-run docker-build-app docker-autostart-app docker-clean
+docker-run: # :Run Demo Docker Base 
 	docker stop foxy_controller || true
 	docker rm foxy_controller || true
 	docker run -it \
@@ -65,7 +71,7 @@ docker-run: # Run Demo Docker Base
 		--name="foxy_controller" \
 		jetson-model-deployment bash
 
-docker-build-app: # Run Demo Docker And Build Demo
+docker-build-app: # :Run Demo Docker And Build Demo
 	docker stop foxy_controller || true
 	docker rm foxy_controller || true
 	docker run -d	\
@@ -86,7 +92,7 @@ docker-build-app: # Run Demo Docker And Build Demo
 	docker start foxy_controller
 	docker exec foxy_controller bash -c 'bash /root/ros_ws/demos/build.sh'
 
-docker-autostart-app: # Run Demo Docker With App Start
+docker-autostart-app: # :Run Demo Docker With App Start
 	docker stop foxy_controller || true
 	docker rm foxy_controller || true
 	docker run -d	\
@@ -107,12 +113,19 @@ docker-autostart-app: # Run Demo Docker With App Start
 	docker start foxy_controller
 	docker exec foxy_controller bash -c 'source /root/ros_ws/install/setup.bash && ros2 launch ball_track_ros2 track.launch.py use_go1_repbulisher_msg:=true camera_name:=camera_face1 device_id:=0 hz:=25'
 
+docker-clean: # :Docker Stop and Rm
+	docker stop foxy_controller || true
+	docker rm foxy_controller || true
+
+
 #=Demo Deploy Commands
 .PHONY: demo-deploy
-demo-deploy: # Deploy Demo To Unitree Head Board
+demo-deploy: # :Deploy Demo To Unitree Head Board
 	if [ ! -d 'unitree_ros2' ]; then	\
 	   git clone git@github.com:kanghua309/unitree_ros2.git; \
-	   mv unitree_ros2/* .; \
+	   cp -rf unitree_ros2/go1_description .; \
+	   cp -rf unitree_ros2/ros2_unitree_legged_msgs .; \
+	   cp -rf unitree_ros2/unitree_legged_real .; \
 	fi
 	#rm -rf unitree_ros2
 	#rsync -av -e ssh --exclude=*.pt --exclude=*.mp4 $PWD/../deploy $PWD/../docker $PWD/../demos unitree@192.168.123.15:/home/unitree/ros_ws

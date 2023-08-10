@@ -34,7 +34,7 @@ DEFAULT_DOCKER_RUNTIME VAR IS nvidia
 ```
 make image-build 
 or 
-PROXY=<your proxy address> make -e image-build #eg. PROXY=192.168.31.250:7890 make -e image-build
+PROXY=<your proxy address> make -e image-build #eg. PROXY=http://192.168.31.250:7890 make -e image-build
 ```
 2. 部署demo 到目标板卡的目标位置
 ```
@@ -42,7 +42,7 @@ make demo-deploy
 or
 DEFAULT_DEPLOY_HOST_WORKDIR=/tmp/ros_ws DEFAULT_DEPLOY_HOST_LOCATION=king@127.0.0.1 make -e demo-deploy #为了测试目的
 ```
-3. 将domo image tar 导入image repos
+3. Login in 目标板卡的目标位置/demos, Then 将domo image tar 导入image repos
 make image-import
 4. 启动docker并编译docker app
 ```
