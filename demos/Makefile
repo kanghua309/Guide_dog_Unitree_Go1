@@ -145,7 +145,3 @@ demo-deploy: # :Deploy Demo To Unitree Head Board
 	#rsync -av -e ssh --exclude=*.Dockerfile $PWD/../deploy $PWD/../docker $PWD/../demos unitree@192.168.123.13:/home/unitree/ros_ws
 	rsync -av -e ssh --exclude=*.Dockerfile ${PWD}/../demos ${DEFAULT_DEPLOY_HOST_LOCATION}:${DEFAULT_DEPLOY_HOST_WORKDIR}
 
-
-xxxx:
-	ls
-	pgrep -f point | grep -v $$ | xargs -r kill ||true
