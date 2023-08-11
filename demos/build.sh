@@ -18,4 +18,4 @@ echo "Dep Install Over ..."
 colcon build --paths src/demos/* 
 
 echo "Build Over ..."
-
+ldconfig
