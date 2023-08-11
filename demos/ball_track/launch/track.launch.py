@@ -30,7 +30,7 @@ def generate_launch_description():
         
         DeclareLaunchArgument(
                         name='debug',
-                        default_value=False,
+                        default_value='False',
                         description='Debug For In PC'
                      ),
 

@@ -41,6 +41,7 @@ class CameraRepublisherNode(Node):
             print("cannot open camera ")
 
         if self.debug.value == True:
+            print("debug .")
             self.vid.set(cv2.CAP_PROP_FRAME_WIDTH, 600)
             self.vid.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
         else:

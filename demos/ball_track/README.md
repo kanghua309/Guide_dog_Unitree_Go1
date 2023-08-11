@@ -3,14 +3,17 @@ pip install python3-sensor-msgs
 
 
 编译pakcage
-colcon build --packages-select ball_track_ros2 --ros-args -p camera_name:=camera_face
+colcon build --packages-select ball_track_ros2 
 
 启动节点
-ros2 run ball_track_ros2 track_node
+ros2 run ball_track_ros2 track_node --ros-args -p camera_name:=camera_face -p debug:=False
+如果PC上则可加debug参数
+ros2 run ball_track_ros2 track_node --ros-args -p camera_name:=camera_face -p debug:=True
+
 
 lunch 启动集体启动
 ros2 launch ball_track_ros2 track.launch.py -s
-ros2 launch ball_track_ros2 track.launch.py use_go1_repbulisher_msg:=true camera_name:=camera_face1 device_id:=0 hz:=25
+ros2 launch ball_track_ros2 track.launch.py use_go1_repbulisher_msg:=true camera_name:=camera_face1 device_id:=0 hz:=25 
 如果PC上则可加debug参数
 ros2 launch ball_track_ros2 track.launch.py use_go1_repbulisher_msg:=true camera_name:=camera_face1 device_id:=0 hz:=25 debug:=True
 

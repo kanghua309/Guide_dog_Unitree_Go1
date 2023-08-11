@@ -9,11 +9,9 @@ ros2 pkg create --build-type ament_python republisher_ros2 --dependencies rclpy 
 编译pakcage
 colcon build --packages-select republisher_ros2
 
-启动节点
-ros2 run republisher_ros2 mono_node
 
-给定参数启动
-ros2 run republisher_ros2 mono_node --ros-args -p device_id:=0 -p camera_name:=camera_face -p hz:=0.5 #虚拟机中这个值设置大了，就服务调用失败， 默认本应该是25
+启动
+ros2 run republisher_ros2 mono_node --ros-args -p device_id:=0 -p camera_name:=camera_face -p hz:=0.5 -p debug:=False #虚拟机中这个值设置大了，就服务调用失败， 默认本应该是25
 如果在PC上则可使用debug参数
 ros2 run republisher_ros2 mono_node --ros-args -p device_id:=0 -p camera_name:=camera_face -p hz:=0.5 -p debug:=True
 

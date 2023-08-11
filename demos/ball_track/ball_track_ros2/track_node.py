@@ -63,6 +63,7 @@ class AdaFollowRedBallDemo(Node):
                 self.change_pitch_yaw(int(center_z), int(center_y), int(width//2), int(height//2))
                 self.publish_idle_mode(True)
         if self.debug.value == True:
+            print("debug")
             cv2.imshow("Detected Circle", raw_img)
             cv2.waitKey(3)
 
