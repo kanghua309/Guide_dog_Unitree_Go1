@@ -3,7 +3,6 @@ DEFAULT_DOCKER_RUNTIME = "nvidia"
 DEFAULT_DEPLOY_HOST_WORKDIR = "/home/unitree/ros_ws"
 DEFAULT_DEPLOY_HOST_LOCATION="unitree@192.168.123.13"
 
-
 UNAME_S := $(shell uname -s)
 
 ifeq ($(UNAME_S),Linux)
@@ -16,7 +15,6 @@ ifeq ($(UNAME_S),Darwin)
     # you need install - brew install gnu-sed 
     SED = gsed
 endif
-
 
 
 #=Help Commands
@@ -147,3 +145,7 @@ demo-deploy: # :Deploy Demo To Unitree Head Board
 	#rsync -av -e ssh --exclude=*.Dockerfile $PWD/../deploy $PWD/../docker $PWD/../demos unitree@192.168.123.13:/home/unitree/ros_ws
 	rsync -av -e ssh --exclude=*.Dockerfile ${PWD}/../demos ${DEFAULT_DEPLOY_HOST_LOCATION}:${DEFAULT_DEPLOY_HOST_WORKDIR}
 
+
+xxxx:
+	ls
+	pgrep -f point | grep -v $$ | xargs -r kill ||true
