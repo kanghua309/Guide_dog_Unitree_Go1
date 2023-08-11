@@ -92,6 +92,7 @@ docker-build-app: # :Run Demo Docker And Build Demo
 	docker exec foxy_controller bash -c 'bash /root/ros_ws/demos/build.sh'
 
 docker-autostart-app: # :Run Demo Docker With App Start
+	pgrep -f point | grep -v $$ | xargs -r kill || true
 	docker stop foxy_controller || true
 	docker rm foxy_controller || true
 	docker run -d	\
