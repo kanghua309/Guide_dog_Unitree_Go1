@@ -13,7 +13,11 @@ class AdaFollowRedBallDemo(Node):
         super().__init__('ada_follow_red_ball_demo')
 
         self.declare_parameter('camera_name', rclpy.Parameter.Type.STRING)
+        self.declare_parameter('debug', rclpy.Parameter.Type.BOOL)
+
         camera_name = self.get_parameter('camera_name')
+        self.debug = self.get_parameter('debug')
+
         self.subscription = self.create_subscription(Image, f'{camera_name.value}/image_raw', self.image_callback, 10)
         self.publisher = self.create_publisher(HighCmd, '/high_cmd', 10)
         self.bool_publisher = self.create_publisher(Bool, '/idle_mode_checker', 10)
@@ -58,8 +62,9 @@ class AdaFollowRedBallDemo(Node):
                 print("Control Dog Head ------------------>")
                 self.change_pitch_yaw(int(center_z), int(center_y), int(width//2), int(height//2))
                 self.publish_idle_mode(True)
-        cv2.imshow("Detected Circle", raw_img)
-        cv2.waitKey(3)
+        if self.debug.value == True:
+            cv2.imshow("Detected Circle", raw_img)
+            cv2.waitKey(3)
 
     def change_pitch_yaw(self, ball_z, ball_y, middle_z, middle_y):
         dist_y = ball_y - middle_y
