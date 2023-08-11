@@ -4,10 +4,25 @@ DEFAULT_DEPLOY_HOST_WORKDIR = "/home/unitree/ros_ws"
 DEFAULT_DEPLOY_HOST_LOCATION="unitree@192.168.123.13"
 
 
+UNAME_S := $(shell uname -s)
+
+ifeq ($(UNAME_S),Linux)
+    # Linux specific CFLAGS or LDFLAGS etc.
+    SED = sed
+endif
+
+ifeq ($(UNAME_S),Darwin)
+    # macOS specific CFLAGS or LDFLAGS etc.
+    # you need install - brew install gnu-sed 
+    SED = gsed
+endif
+
+
+
 #=Help Commands
 .PHONY: help
 help: # Shows the available make commands.
-	@sed -nr \
+	@${SED} -nr \
 		-e 's|^#=(.*)|\n\1:|p' \
 		-e 's|^([a-zA-Z-]*):((.*?)# (.*))?|  \1 \4|p' \
 		$(lastword $(MAKEFILE_LIST)) \

@@ -32,6 +32,7 @@ RUN apt-get update \
 RUN cd /tmp && git clone https://github.com/lcm-proj/lcm.git && cd lcm && mkdir build && cd build && cmake .. && make -j && make install && rm -rf /tmp/lcm
 RUN ldconfig
 
+
 #https://blog.csdn.net/JasonXu94/article/details/129698868
 RUN pip3 config set global.index-url https://mirrors.aliyun.com/pypi/simple \
 && pip3 config set install.trusted-host mirrors.aliyun.com \
