@@ -11,6 +11,8 @@ ros2 run ball_track_ros2 track_node
 lunch 启动集体启动
 ros2 launch ball_track_ros2 track.launch.py -s
 ros2 launch ball_track_ros2 track.launch.py use_go1_repbulisher_msg:=true camera_name:=camera_face1 device_id:=0 hz:=25
+如果PC上则可加debug参数
+ros2 launch ball_track_ros2 track.launch.py use_go1_repbulisher_msg:=true camera_name:=camera_face1 device_id:=0 hz:=25 debug:=True
 
 
 调试：

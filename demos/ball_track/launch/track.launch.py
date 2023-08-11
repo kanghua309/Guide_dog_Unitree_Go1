@@ -27,7 +27,12 @@ def generate_launch_description():
                         default_value='camera_face',
                         description='Camera Name For Go1'
                      ),
-
+        
+        DeclareLaunchArgument(
+                        name='debug',
+                        default_value=False,
+                        description='Debug For In PC'
+                     ),
 
         DeclareLaunchArgument(
                         name='device_id',
@@ -62,7 +67,8 @@ def generate_launch_description():
             parameters=[{
                 'camera_name': LaunchConfiguration("camera_name"),
                 'device_id': LaunchConfiguration("device_id"),
-                'hz': LaunchConfiguration("hz")
+                'hz': LaunchConfiguration("hz"),
+                'debug': LaunchConfiguration("debug"),
             }],
             condition=IfCondition(LaunchConfiguration('use_go1_repbulisher_msg')),
         ),
@@ -73,6 +79,7 @@ def generate_launch_description():
             output='screen',
               parameters=[{
                 'camera_name': LaunchConfiguration("camera_name"),
+                'debug': LaunchConfiguration("debug"),
             }],
         ),
     ])

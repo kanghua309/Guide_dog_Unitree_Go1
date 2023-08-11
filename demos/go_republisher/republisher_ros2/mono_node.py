@@ -15,7 +15,7 @@ class CameraRepublisherNode(Node):
         self.declare_parameter('camera_name', rclpy.Parameter.Type.STRING)
         self.declare_parameter('device_id', rclpy.Parameter.Type.INTEGER)
         self.declare_parameter('hz', rclpy.Parameter.Type.DOUBLE)
-
+        self.declare_parameter('debug', rclpy.Parameter.Type.BOOL)
         #device_id = self.get_parameter('device_id').get_parameter_value().integer_value
         #camera_name = self.get_parameter('camera_name').get_parameter_value().string_value
         #calibration_left = self.get_parameter('calibration_left').get_parameter_value().string_value
@@ -23,6 +23,7 @@ class CameraRepublisherNode(Node):
         camera_name = self.get_parameter('camera_name')
         device_id = self.get_parameter('device_id')
         hz = self.get_parameter('hz')
+        self.debug = self.get_parameter('debug')
     
         self.get_logger().info("str: %s, int: %d " %
                             (str(camera_name.value),
@@ -39,8 +40,13 @@ class CameraRepublisherNode(Node):
         if not self.vid .isOpened():
             print("cannot open camera ")
 
-        self.vid.set(cv2.CAP_PROP_FRAME_WIDTH, 600)
-        self.vid.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
+        if self.debug.value == True:
+            self.vid.set(cv2.CAP_PROP_FRAME_WIDTH, 600)
+            self.vid.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
+        else:
+            self.vid.set(cv2.CAP_PROP_FRAME_WIDTH, 1856)
+            self.vid.set(cv2.CAP_PROP_FRAME_HEIGHT, 800)
+
         print("3",camera_name.value)
 
         self.pub_left = self.create_publisher(Image, f'{camera_name.value}/image_raw', 10)
@@ -57,8 +63,11 @@ class CameraRepublisherNode(Node):
         ret, frame = self.vid.read()
         if not ret:
             return
+        if self.debug.value == True:
+            frame_left = frame[0:480, 0:600]
+        else:
+            frame_left = frame[0:800, 928:1856]
 
-        frame_left = frame[0:480, 0:600]
         img_left = self.bridge.cv2_to_imgmsg(frame_left, "bgr8")
 
         now = self.get_clock().now().to_msg()
