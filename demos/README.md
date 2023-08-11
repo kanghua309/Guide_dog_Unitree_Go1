@@ -60,6 +60,7 @@ source install/setup.bash #in docker
 ros2 launch ball_track_ros2 track.launch.py use_go1_repbulisher_msg:=true camera_name:=camera_face1 device_id:=0 hz:=25 #in docker 
 
 #AutoStart
+pkill -f point #kill to free video devices first
 DEFAULT_DEPLOY_HOST_WORKDIR=/home/unitree/ros_ws make -e docker-autostart-app
 
 ```
