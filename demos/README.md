@@ -50,7 +50,19 @@ make docker-build-app
 or
 DEFAULT_DOCKER_RUNTIME=runc DEFAULT_DEPLOY_HOST_WORKDIR=/home/unitree/ros_ws make -e docker-build-app
 ``
+5. Run App With Docker
+```
+#Manual Run
+make -e docker-run 
+or 
+DEFAULT_DEPLOY_HOST_WORKDIR=/home/unitree/ros_ws make -e docker-run
+source install/setup.bash #in docker 
+ros2 launch ball_track_ros2 track.launch.py use_go1_repbulisher_msg:=true camera_name:=camera_face1 device_id:=0 hz:=25 #in docker 
 
+#AutoStart
+DEFAULT_DEPLOY_HOST_WORKDIR=/home/unitree/ros_ws make -e docker-autostart-app
+
+```
 
 其他：
 如何缩小镜像，变成runtime 的，而不是devel的
