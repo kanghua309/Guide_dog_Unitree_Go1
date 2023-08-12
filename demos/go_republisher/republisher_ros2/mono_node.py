@@ -37,7 +37,7 @@ class CameraRepublisherNode(Node):
 
         self.vid = cv2.VideoCapture(device_id.value)
         print("2")
-        if not self.vid .isOpened():
+        if not self.vid.isOpened():
             print("cannot open camera ")
 
         if self.debug.value == True:
@@ -92,7 +92,7 @@ def main(args=None):
         print('Error: ', e)
     finally:
         camera_republisher_node.vid.release()
-        cv2.destroyAllWindows()
+        # cv2.destroyAllWindows() -- headless 下可省略
         camera_republisher_node.destroy_node()
         rclpy.shutdown()
 

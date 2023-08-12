@@ -2,6 +2,7 @@
 DEFAULT_DOCKER_RUNTIME = "nvidia"
 DEFAULT_DEPLOY_HOST_WORKDIR = "/home/unitree/ros_ws"
 DEFAULT_DEPLOY_HOST_LOCATION="unitree@192.168.123.13"
+DEFAULT_PLATFORM="linux/arm64"
 
 UNAME_S := $(shell uname -s)
 
@@ -31,6 +32,7 @@ help: # Shows the available make commands.
 	@echo "DEFAULT_DOCKER_RUNTIME VAR IS ${DEFAULT_DOCKER_RUNTIME}"
 	@echo "DEFAULT_DEPLOY_HOST_WORKDIR VAR IS ${DEFAULT_DEPLOY_HOST_WORKDIR}"
 	@echo "DEFAULT_DEPLOY_HOST_LOCATION VAR IS ${DEFAULT_DEPLOY_HOST_LOCATION}"
+	@echo "DEFAULT_PLATFORM VAR IS ${DEFAULT_PLATFORM}"
 	@echo "------------------------------------------------------------"
 
 
@@ -38,7 +40,7 @@ help: # Shows the available make commands.
 .PHONY: image-build image-import image-clean
 image-build: # :Build image For Demos
 ifdef PROXY
-	docker buildx build --platform linux/arm64 \
+	docker buildx build --platform ${DEFAULT_PLATFORM} \
 		-o type=tar,dest=deployment_image.tar \
 		-t jetson-model-deployment \
 		--build-arg "HTTP_PROXY=${PROXY}" \
@@ -46,7 +48,7 @@ ifdef PROXY
 		--no-cache=true \
 		. -f ros2_mini.Dockerfile 
 else 
-	docker buildx build --platform linux/arm64 \
+	docker buildx build --platform ${DEFAULT_PLATFORM} \
 		-o type=tar,dest=deployment_image.tar \
 		-t jetson-model-deployment \
 		--no-cache=true \
@@ -124,7 +126,7 @@ docker-autostart-app: # :Run Demo Docker With App Start
 		--name="foxy_controller" \
 		jetson-model-deployment tail -f /dev/null
 	docker start foxy_controller
-	docker exec foxy_controller bash -c 'source /root/ros_ws/install/setup.bash && ros2 launch ball_track_ros2 track.launch.py use_go1_repbulisher_msg:=true camera_name:=camera_face1 device_id:=0 hz:=25'
+	docker exec foxy_controller bash -c 'source /root/ros_ws/install/setup.bash && ros2 launch ball_track_ros2 track.launch.py use_go1_repbulisher_msg:=True camera_name:=camera_face1 device_id:=0 hz:=25'
 
 docker-clean: # :Docker Stop and Rm
 	docker stop foxy_controller || true

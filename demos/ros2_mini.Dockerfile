@@ -1,4 +1,8 @@
-FROM arm64v8/ros:foxy-ros-base-focal as arm64_foxy_base
+FROM  ros:foxy-ros-base-focal as amd64_foxy_base
+RUN sed -i s/archive.ubuntu.com/mirrors.aliyun.com/g /etc/apt/sources.list
+RUN sed -i s/security.ubuntu.com/mirrors.aliyun.com/g /etc/apt/sources.list
+
+FROM  arm64v8/ros:foxy-ros-base-focal as arm64_foxy_base
 RUN sed -i 's/ports.ubuntu.com/mirrors.aliyun.com/g' /etc/apt/sources.list
 
 FROM ${TARGETARCH}_foxy_base as dev

@@ -16,8 +16,8 @@ def generate_launch_description():
 
         DeclareLaunchArgument(
             name='use_go1_repbulisher_msg',
-            default_value='true',
-            choices=['true','false'],
+            default_value='True',
+            choices=['True','False'],
             description='Run Go1 Republisher Ros2 First'
         ),
 

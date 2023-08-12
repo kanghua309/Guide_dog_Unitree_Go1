@@ -34,4 +34,6 @@ lsusb 查看usb设备列表
 ls /dev/video* 查看摄像头驱动安装
 sudo apt-get install cheese 如果已经安装，这步可以省略
 cheese 打开摄像头
+apt-get install v4l-utils
+v4l2-ctl --list-devices
 

@@ -65,7 +65,7 @@ class AdaFollowRedBallDemo(Node):
         if self.debug.value == True:
             print("debug")
             cv2.imshow("Detected Circle", raw_img)
-            cv2.waitKey(3)
+        cv2.waitKey(3)
 
     def change_pitch_yaw(self, ball_z, ball_y, middle_z, middle_y):
         dist_y = ball_y - middle_y
