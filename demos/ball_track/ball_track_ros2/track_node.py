@@ -1,4 +1,5 @@
 import codecs
+import time
 import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import Image
@@ -59,13 +60,16 @@ class AdaFollowRedBallDemo(Node):
 
                 cv2.arrowedLine(raw_img, (width//2, height//2), (int(center_z), int(center_y)), color=(0, 255, 0),
                                 thickness=3, line_type=8, shift=0, tipLength=0.1)
-                print("Control Dog Head ------------------>")
+                self.get_logger().info("Control Dog Head ------------------>:")
                 self.change_pitch_yaw(int(center_z), int(center_y), int(width//2), int(height//2))
                 self.publish_idle_mode(True)
         if self.debug.value == True:
-            print("debug")
+            #print("debug")
             cv2.imshow("Detected Circle", raw_img)
-        cv2.waitKey(3)
+            cv2.waitKey(3)
+        else:
+            #print("headless ... ")
+            time.sleep(30 / 1000.0)
 
     def change_pitch_yaw(self, ball_z, ball_y, middle_z, middle_y):
         dist_y = ball_y - middle_y
