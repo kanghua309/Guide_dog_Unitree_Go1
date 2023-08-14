@@ -81,7 +81,7 @@ PLATFORM=linux/amd64 make -e image-build
 
 
 注意：
-当前镜像是使用的opencv-python-headless ，若在pc 上调试，手动安装 opencv-python
+- 当前镜像是使用的opencv-python-headless ，若在pc 上调试，手动安装 opencv-python
 
 其他：
 如何缩小镜像，变成runtime 的，而不是devel的
