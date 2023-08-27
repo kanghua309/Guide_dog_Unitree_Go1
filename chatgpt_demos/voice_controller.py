@@ -124,10 +124,6 @@ def recognize_speech():
             print(actions)
             _execute_command_chain(actions=actions[1:])
 
-
-
-            
-
         except sr.UnknownValueError:
             print("抱歉，无法识别您说的内容。")
         except sr.RequestError as e:
@@ -135,7 +131,13 @@ def recognize_speech():
 
 if __name__ == "__main__":
     openai.api_base = "https://api.openai.com/v1"
-    openai.api_key ="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"
+    openai.api_key = os.environ.get("API_KEY")
+    if openai.api_key is None:
+        print("API key not found in environment variable.")
+        exit(-1)
+    else:
+        print("API key:", openai.api_key)
+
     # completion = openai.ChatCompletion.create(
     # model="gpt-3.5-turbo",
     # messages=[
