@@ -8,6 +8,8 @@ openai 包, 你得有api key ，且要有调用配额
 - pip install openai
 speech_recognition 包 - 语音识别很是牛逼 
 - pip install SpeechRecognition
+- 如果在liunx 中可能需要安装 pip3 install sounddevice and then in your code import sounddevice  -- 解决声卡识别问题
+
 
 具体部署运行办法：
 启动相关的ros2节点组
